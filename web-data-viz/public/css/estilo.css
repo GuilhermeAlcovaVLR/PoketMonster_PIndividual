@@ -68,7 +68,7 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url('../assets/imgs/BannerHero.png');
+  background-image: url('../assets/imgs/BannerSecaoHero.png');
   background-size: cover;
 }
 
