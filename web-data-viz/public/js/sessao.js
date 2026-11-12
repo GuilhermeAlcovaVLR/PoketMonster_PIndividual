@@ -34,3 +34,50 @@ function finalizarAguardar(texto) {
     }
 }
 
+var conteudosKanto = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "SIM"
+    }
+}
+
+function abrirPopUp(card){
+    var conteudo =conteudosKanto[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
+
+/* function fecharPopup() {
+    document.getElementById("popup").close();
+}
+const button = document.querySelector(".card_individual_")
+
+const modal = document.querySelector("dialog")
+
+const botaoFechar = document.querySelector("dialog button")
+
+button.onclick = function(){
+    modal.showModal()
+}
+
+botaoFechar.onclick = function(){
+    modal.close()
+}
+*/
+

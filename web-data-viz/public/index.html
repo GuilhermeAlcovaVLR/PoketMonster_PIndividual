@@ -57,18 +57,6 @@
         vem da região Kantō, no Japão real, onde ficam Tóquio e arredores, e o mapa do jogo é inspirado nessa geografia.
         Kanto é a casa dos 151 Pokémon originais, de Bulbasaur a Mew, que formam a chamada primeira geração e continuam
         sendo os mais icônicos da franquia.
-
-
-
-
-
-
-      </div>
-      <div class="risco_">
-
-        <div class="fonte_">
-
-        </div>
       </div>
 
     </section>
@@ -76,28 +64,35 @@
 
     <section class="blocos_">
 
-      <button class="card_individual_">
+      <button onclick="abrirPopUp('lore')" class="card_individual_">
         <h3 class="textoCartao">HISTÓRIA</h3>
       </button>
 
-      <button class="card_individual_">
-        <h3 class="textoCartao">ANIME</h3>
+     
 
-      </button>
+        <button onclick="abrirPopUp('Anime')" class="card_individual_">
+          <h3 class="textoCartao">ANIME</h3>
 
-      <button class="card_individual_">
-        <h3 class="textoCartao">INICIAIS</h3>
+        </button>
 
-      </button>
+        <button onclick ="abrirPopUp('Iniciais')"  class="card_individual_">
+          <h3 class="textoCartao">INICIAIS</h3>
 
-      <button class="card_individual_">
-        <p class="textoCartao">INOVAÇÕES</p>
+        </button>
 
-      </button>
+        <button onclick="abrirPopUp('Inovacoes')" class="card_individual_">
+          <p class="textoCartao">INOVAÇÕES</p>
+
+        </button>
 
     </section>
 
   </section>
+  <dialog id="popup">
+    <h2 id="popup-titulo"></h2>
+    <p id="popup-texto"></p>
+    <button onclick="document.getElementById('popup').close()">X</button>
+</dialog>
 
 
   <section class="divisao_ fundoJohto">
@@ -536,7 +531,7 @@
           via no anime. Ainda lembro de escolher o Squirtle como inicial por sugestão dele, de procurar cheats do jogo
           para upar minha equipe, e vídeos no youtube para avançar no jogo.
 
-          
+
         </span>
       </div>
     </div>
@@ -549,6 +544,7 @@
         <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
       </div>
     </div>
+
 </body>
 
 </html>
