@@ -109,7 +109,7 @@ button {
 
 .login {
   height: var(--tamanho-login);
-  background-image: url('../assets/imgs/gengar_vs_nidorino_leaf_green_fire_red_version__by_vidrovov_de34y32-fullview.jpg');
+  background-image: url('../assets/imgs/FundoLoginPokebola.png');
   background-size: cover;
 }
 
@@ -121,12 +121,12 @@ button {
 
 .card {
   width: 50%;
-  background-color: #e5e5e5;
+  background-color: #DFDFDF  ;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: palevioletred;
+  color: #EE1515;
   flex-direction: column;
   height: fit-content;
   padding: 20px 0;
@@ -151,14 +151,14 @@ button {
 }
 
 .formulario input {
-  border: 2px solid #32b9cd;
+  border: 2px solid #222224;
   text-align: center;
   border-radius: 10px;
   margin: 0;
 }
 
 .formulario select {
-  border: 2px solid #32b9cd;
+  border: 2px solid #222224;
   background-color: white;
   color: gray;
   height: 36px;
@@ -182,7 +182,7 @@ button {
   font-weight: 600;
   font-size: 18px;
   color: #fff;
-  background-color: #ED145B;
+  background-color: #FB1B1B ;
   width: 120px;
   height: 30px;
   align-self: center;

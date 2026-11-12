@@ -54,6 +54,7 @@ var conteudosKanto = {
     }
 }
 
+
 function abrirPopUp(card){
     var conteudo =conteudosKanto[card];
     if (conteudo) {
