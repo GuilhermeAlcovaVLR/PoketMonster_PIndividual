@@ -53,27 +53,31 @@
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
-          
+
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
+            <small class="mensagem-campo"></small>
           </div>
           <div class="campo">
             <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+            <input id="email_input" type="text" placeholder="squirtle@esquadrao.com" />
+            <small class="mensagem-campo"></small>
           </div>
           <div class="campo">
             <span>Senha:</span>
             <input id="senha_input" type="password" placeholder="******" />
+            <small class="mensagem-campo"></small>
           </div>
           <div class="campo">
             <span>Confirmação da Senha:</span>
             <input id="confirmacao_senha_input" type="password" placeholder="******" />
+            <small class="mensagem-campo"></small>
           </div>
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
         <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
+          <img src="./assets/gifPoket.gif" id="loading-gif" />
         </div>
 
         <div id="div_erros_login"></div>
@@ -81,23 +85,79 @@
     </div>
   </div>
 
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-    </div>
-  </div>
-  <!--footer fim-->
+
 </body>
 
 </html>
 
 <script>
+  function erroInput(input, mensagem) {
+    const campoItem = input.parentElement;
+    const textoMensagem = campoItem.querySelector(".mensagem-campo");
+
+    textoMensagem.innerText = mensagem;
+    campoItem.className = "campo error";
+  }
+
+  function limparErrorInput(input) {
+    const campoItem = input.parentElement;
+    campoItem.className = "campo";
+  }
+
+  function checharNome() {
+    const nomeVar = nome_input.value.trim();
+
+    if (nomeVar === "") {
+      erroInput(nome_input, "Insira seu nome treinador")
+    } else {
+      limparErroInput(nome_input);
+    }
+  }
+
+  function checharEmail() {
+    const emailVar = email_input.value.trim();
+
+    if (emailVar === "") {
+      erroInput(email_input, "Insira seu email")
+    } else if (!emailVar.includes("@") || !emailVar.includes(".")) {
+      erroInput(email_input, `O email deve conter @ e "." (ex: red@gmail.com)`)
+    } else {
+      limparErroInput(email_input);
+    }
+  }
+
+
+  function checarSenha(){
+    const senhaVar = senha_input.value.trim();
+
+    if(senhaVar === ""){
+      erroInput(senha_input, "Insira uma senha")
+    }else if(senhaVar.length > 8){
+      erroInput(senha_input, "A senha deve ter pelo menos 8 caracteres")
+    }else{
+      limparErrorInput(senha_input);
+    }
+  }
+
+    function checarConfirmacaoSenha(){
+    const ConfirmacaosenhaVar = confirmacao_senha_input.value.trim();
+
+    if(senhaVar === ""){
+      erroInput(confirmacao_senha_input, "Confirme sua senha")
+    }else if(ConfirmacaosenhaVar != senhaVar){
+      erroInput(confirmacao_senha_input, "A senha deve ter pelo menos 8 caracteres")
+    }else{
+      limparErrorInput(confirmacao_senha_input);
+    }
+  }
+
+
+
   function cadastrar() {
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    checarNome(); // Valida o Nome
+    checarEmail(); // Valida o E-mail
+    checarSenha(); // Valida a Senha
+    checarConfirmacaoSenha(); // Valida a Confirmação de Senha
 
     if (
       nomeVar == "" ||

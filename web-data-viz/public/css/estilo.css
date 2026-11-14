@@ -171,8 +171,25 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  padding: 5px 0;
+  margin-bottom: 12px;
 }
+
+.campo .mensagem-campo{
+  color: #f00000;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 16px;
+  visibility: hidden;
+}
+
+.campo.error input{
+  color: #f00000;
+}
+
+.campo.error .mensagem-campo{
+  visibility: visible;
+}
+
 
 .botao {
   cursor: pointer;
