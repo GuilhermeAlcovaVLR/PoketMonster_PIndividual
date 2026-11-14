@@ -5,8 +5,17 @@
 /*
 comandos para mysql server
 */
+CREATE DATABASE mestre_pokemon;
 
-CREATE DATABASE aquatech;
+USE mestre_pokemon;
+
+CREATE TABLE usuario (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(50),
+	email VARCHAR(140),
+	senha VARCHAR(50)
+);
+/*CREATE DATABASE aquatech;
 
 USE aquatech;
 
@@ -55,4 +64,4 @@ create table medida (
 insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
 insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
 insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);*/
