@@ -104,17 +104,17 @@
     campoItem.className = "campo";
   }
 
-  function checharNome() {
+  function checarNome() {
     const nomeVar = nome_input.value.trim();
 
     if (nomeVar === "") {
-      erroInput(nome_input, "Insira seu nome treinador")
+      erroInput(nome_input, "Oak : Agora, qual era mesmo o seu nome?")
     } else {
-      limparErroInput(nome_input);
+      limparErrorInput(nome_input);
     }
   }
 
-  function checharEmail() {
+  function checarEmail() {
     const emailVar = email_input.value.trim();
 
     if (emailVar === "") {
@@ -122,7 +122,7 @@
     } else if (!emailVar.includes("@") || !emailVar.includes(".")) {
       erroInput(email_input, `O email deve conter @ e "." (ex: red@gmail.com)`)
     } else {
-      limparErroInput(email_input);
+      limparErrorInput(email_input);
     }
   }
 
@@ -132,7 +132,7 @@
 
     if(senhaVar === ""){
       erroInput(senha_input, "Insira uma senha")
-    }else if(senhaVar.length > 8){
+    }else if(senhaVar.length < 8){
       erroInput(senha_input, "A senha deve ter pelo menos 8 caracteres")
     }else{
       limparErrorInput(senha_input);
@@ -140,53 +140,48 @@
   }
 
     function checarConfirmacaoSenha(){
+    const senhaVar = senha_input.value.trim();
     const ConfirmacaosenhaVar = confirmacao_senha_input.value.trim();
 
-    if(senhaVar === ""){
+    if(ConfirmacaosenhaVar === ""){
       erroInput(confirmacao_senha_input, "Confirme sua senha")
     }else if(ConfirmacaosenhaVar != senhaVar){
-      erroInput(confirmacao_senha_input, "A senha deve ter pelo menos 8 caracteres")
+      erroInput(confirmacao_senha_input, "As senhas não podem ser diferentes")
     }else{
       limparErrorInput(confirmacao_senha_input);
     }
   }
 
+  nome_input.addEventListener("blur", checarNome);
+  email_input.addEventListener("blur", checarEmail);
+  senha_input.addEventListener("blur", checarSenha);
+  confirmacao_senha_input.addEventListener("blur", checarConfirmacaoSenha)
+
+
 
 
   function cadastrar() {
-    checarNome(); // Valida o Nome
-    checarEmail(); // Valida o E-mail
-    checarSenha(); // Valida a Senha
-    checarConfirmacaoSenha(); // Valida a Confirmação de Senha
+    checarNome(); 
+    checarEmail(); 
+    checarSenha(); 
+    checarConfirmacaoSenha(); 
 
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML = "Preencha todos os campos em branco!";
-      finalizarAguardar();
-      return false;
-    } else if (senhaVar != confirmacaoSenhaVar) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML = "As senhas não coincidem!";
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
+    const campos = document.querySelectorAll(".formulario .campo");
+    const formularioValido = [...campos].every((item) => item.className === "campo" );
+    if(!formularioValido){
+      return false
     }
-
+    
+    
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
+        nomeServer: nome_input.value.trim(),
+        emailServer: email_input.value.trim(),
+        senhaServer: senha_input.value.trim(),
       }),
     })
       .then(function (resposta) {
@@ -200,14 +195,19 @@
           setTimeout(() => {
             window.location = "login.html";
           }, 2000);
-
-          finalizarAguardar();
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          resposta.text().then((texto) => { 
+            if (texto.includes("Duplicate entry")) { 
+              erroInput(email_input, "Este e-mail já está cadastrado."); 
+            } else { 
+              cardErro.style.display = "block";
+              mensagem_erro.innerHTML = "Erro ao realizar o cadastro."; 
+            }
+          });
         }
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
         finalizarAguardar();
       });
 
