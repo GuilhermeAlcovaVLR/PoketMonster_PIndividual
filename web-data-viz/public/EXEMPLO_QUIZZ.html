@@ -16,7 +16,7 @@
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
                 <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+                <span class="width-fit-content nomeOculto">Quantidade de erros: <span id="spanErradas"></span></span>
             </div>
             <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
                 <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
@@ -31,10 +31,15 @@
             <div id="infoQuestao" class="padding-8">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
+                <br>
+                <span>Região:<strong id="spanRegiaoAtual">Kanto</strong></span>
             </div>
 
             <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
+                <span id="spanQuestaoExibida" class="text-bold">QUEM É ESSE POKÉMON</span>
+                <br><span id="spanRevelacao" class="text-bold"></span>
+                <br><img id="imgPokemon" class="silhueta" style="width: 180px; 
+                height: 180px; object-fit: contain;">
             </div>
 
             <div id="infoAlternativas" class="padding-8">
@@ -76,11 +81,15 @@
     const listaDeQuestoes = [
 
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "Quem é esse Pokémon?",
+            revelacao:"PIKACHU" ,
+            imagem: "./assets/imgs/Pikachu.png",
+            alternativaA: "Gengar",
+            alternativaB: "Nidorino",
+            alternativaC: "Pikachu",
+            alternativaD: "Eeve",
             alternativaCorreta: "alternativaC"
         },
 
@@ -139,8 +148,17 @@
         numeroDaQuestaoAtual = index
         console.log("questaoAtual")
         console.log(questaoAtual)
+
+        document.getElementById("spanRegiaoAtual").innerHTML = questaoAtual.regiao;
+        const img = document.getElementById("imgPokemon");
+        img.src = questaoAtual.imagem;
+        img.classList.remove("revelado")
+
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+
+
+
         document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
         document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
         document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
@@ -155,6 +173,7 @@
             if (options[i].checked) {
                 hasChecked = true
                 break
+
             }
         }
 
@@ -210,8 +229,12 @@
 
         let alternativaCorreta = null // variável para armazenar a alternativa correta
 
+        
+        document.getElementById("spanRevelacao").innerHTML = questaoAtual.revelacao;
+
         options.forEach((option) => {
             if (option.value === respostaQuestaoAtual) {
+                document.getElementById("imgPokemon").classList.add("revelado");
                 console.log("alternativaCorreta está no componente: " + alternativaCorreta)
                 alternativaCorreta = option.labels[0].id
             }
@@ -271,14 +294,14 @@
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
 
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
+        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-        document.getElementById('jogo').classList.add("text-new-gray") 
+        document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true

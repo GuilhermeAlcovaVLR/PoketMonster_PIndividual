@@ -72,3 +72,21 @@ button {
 .text-new-gray {
     color: var(--new-gray);
 }
+
+
+
+.silhueta {
+    filter: brightness(0);
+    transition: filter 0.9s ease;
+    user-select: none;
+    -webkit-user-drag: none; /* Evita que o usuário arraste a imagem para ver a cor */
+}
+
+.nomeOculto{
+    visibility: hidden;
+}
+
+.revelado {
+    filter: brightness(1);
+}
+

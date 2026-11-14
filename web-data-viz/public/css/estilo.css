@@ -90,7 +90,7 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-button {
+.banner .button {
   font-size: 35px;
   font-family: 'Bangers', system-ui;
   background-color: #ffcb05;
