@@ -110,7 +110,7 @@ body {
 
 .silhueta {
     filter: brightness(0);
-    transition: filter 0.9s ease;
+    transition: filter 0.0  s ease;
     user-select: none;
     -webkit-user-drag: none;
 }

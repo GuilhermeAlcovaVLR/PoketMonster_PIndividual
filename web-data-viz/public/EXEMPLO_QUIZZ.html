@@ -16,12 +16,12 @@
         </div>
 
         <div class="container-quiz" id="containerQuiz">
-            
+
             <section class="coluna-esquerda">
                 <div id="pontuacao">
                     <div id="pontuacaoDuranteJogo" class="placar">
                         <span>♦ Acertos: <strong id="spanCertas">0</strong></span><br>
-                        <span >♦ Erros: <span id="spanErradas">0</span></span>
+                        <span>♦ Erros: <span id="spanErradas">0</span></span>
                     </div>
                     <div id="pontuacaoFinalJogo" style="display: none;">
                         <h2 id="pontuacaoFinal">Pontuação Final: <span id="spanPontuacaoFinal">***</span></h2>
@@ -31,13 +31,14 @@
 
                 <div id="jogo" class="alinhamento">
                     <div id="infoQuestao" class="subtitulo-regiao">
-                        <span>♦ Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span> • Região: <strong id="spanRegiaoAtual">Kanto</strong></span>
+                        <span>♦ Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span> •
+                            Região: <strong id="spanRegiaoAtual">Kanto</strong></span>
                     </div>
 
                     <div id="perguntaDaQuestaoAtual">
                         <h1 id="spanQuestaoExibida" class="titulo-pergunta">QUEM É ESSE POKÉMON?</h1>
                         <span id="spanRevelacao" class="texto-revelacao"></span>
-                        
+
                         <div class="box-pokemon">
                             <img id="imgPokemon" class="silhueta" alt="Pokémon oculto">
                         </div>
@@ -58,8 +59,10 @@
                 </div>
 
                 <div id="botoes" class="controles-quiz">
-                    <button onclick="avancar()" id="btnProx" class="btn-acao" disabled>Avançar para próxima questão</button>
-                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="btn-acao" disabled>Tentar novamente</button>
+                    <button onclick="avancar()" id="btnProx" class="btn-acao" disabled>Avançar para próxima
+                        questão</button>
+                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="btn-acao" disabled>Tentar
+                        novamente</button>
                 </div>
             </section>
 
@@ -75,7 +78,7 @@
             geracao: 1,
             regiao: "Kanto",
             pergunta: "QUEM É ESSE POKÉMON?",
-            revelacao: "É O PIKACHU",
+            revelacao: "É O PIKACHU!",
             imagem: "./assets/imgs/Pikachu.png",
             alternativaA: "Gengar",
             alternativaB: "Nidorino",
@@ -85,21 +88,29 @@
         },
 
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O BLASTOISE!",
+            imagem: "./assets/imgs/Blastoise.png",
+            alternativaA: "Charizard",
+            alternativaB: "Nidoking",
+            alternativaC: "Mankey",
+            alternativaD: "Blastoise",
             alternativaCorreta: "alternativaD"
         },
 
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PSYDUCK!",
+            imagem: "./assets/imgs/Psyduck.png",
+            alternativaA: "Psyduck",
+            alternativaB: "Magikarp",
+            alternativaC: "Charmander",
+            alternativaD: "Pidgey",
+            alternativaCorreta: "alternativA"
         }
 
     ]
@@ -123,7 +134,7 @@
         document.getElementById('jogo').style.display = "grid"
         document.getElementById('btnIniciarQuiz').style.display = "none"
         document.getElementById('telaInicial').style.display = "none";
-    document.getElementById('containerQuiz').style.display = "grid";
+        document.getElementById('containerQuiz').style.display = "grid";
 
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
