@@ -11,66 +11,57 @@
 
 <body onload="onloadEsconder()">
     <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
-
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content nomeOculto">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
+        <div class="tela-inicial" id="telaInicial">
+            <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
         </div>
 
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+        <div class="container-quiz" id="containerQuiz">
+            
+            <section class="coluna-esquerda">
+                <div id="pontuacao">
+                    <div id="pontuacaoDuranteJogo" class="placar">
+                        <span>♦ Acertos: <strong id="spanCertas">0</strong></span><br>
+                        <span >♦ Erros: <span id="spanErradas">0</span></span>
+                    </div>
+                    <div id="pontuacaoFinalJogo" style="display: none;">
+                        <h2 id="pontuacaoFinal">Pontuação Final: <span id="spanPontuacaoFinal">***</span></h2>
+                        <p id="msgFinal">***</p>
+                    </div>
+                </div>
 
-            <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
-                <br>
-                <span>Região:<strong id="spanRegiaoAtual">Kanto</strong></span>
-            </div>
+                <div id="jogo" class="alinhamento">
+                    <div id="infoQuestao" class="subtitulo-regiao">
+                        <span>♦ Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span> • Região: <strong id="spanRegiaoAtual">Kanto</strong></span>
+                    </div>
 
-            <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold">QUEM É ESSE POKÉMON</span>
-                <br><span id="spanRevelacao" class="text-bold"></span>
-                <br><img id="imgPokemon" class="silhueta" style="width: 180px; 
-                height: 180px; object-fit: contain;">
-            </div>
+                    <div id="perguntaDaQuestaoAtual">
+                        <h1 id="spanQuestaoExibida" class="titulo-pergunta">QUEM É ESSE POKÉMON?</h1>
+                        <span id="spanRevelacao" class="texto-revelacao"></span>
+                        
+                        <div class="box-pokemon">
+                            <img id="imgPokemon" class="silhueta" alt="Pokémon oculto">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
-            </div>
+            <section class="coluna-direita">
+                <div id="infoAlternativas" class="instrucao-opcoes">
+                    <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                </div>
 
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
+                <div id="opcoes" class="opcoes">
+                    <button class="btn-opcao" value="alternativaA" onclick="selecionarResposta(this)"></button>
+                    <button class="btn-opcao" value="alternativaB" onclick="selecionarResposta(this)"></button>
+                    <button class="btn-opcao" value="alternativaC" onclick="selecionarResposta(this)"></button>
+                    <button class="btn-opcao" value="alternativaD" onclick="selecionarResposta(this)"></button>
+                </div>
 
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
+                <div id="botoes" class="controles-quiz">
+                    <button onclick="avancar()" id="btnProx" class="btn-acao" disabled>Avançar para próxima questão</button>
+                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="btn-acao" disabled>Tentar novamente</button>
+                </div>
+            </section>
 
         </div>
     </div>
@@ -83,8 +74,8 @@
         {
             geracao: 1,
             regiao: "Kanto",
-            pergunta: "Quem é esse Pokémon?",
-            revelacao:"PIKACHU" ,
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PIKACHU",
             imagem: "./assets/imgs/Pikachu.png",
             alternativaA: "Gengar",
             alternativaB: "Nidorino",
@@ -129,14 +120,15 @@
 
     function iniciarQuiz() {
         document.getElementById('pontuacao').style.display = "flex"
-        document.getElementById('jogo').style.display = "flex"
+        document.getElementById('jogo').style.display = "grid"
         document.getElementById('btnIniciarQuiz').style.display = "none"
+        document.getElementById('telaInicial').style.display = "none";
+    document.getElementById('containerQuiz').style.display = "grid";
 
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
         preencherHTMLcomQuestaoAtual(0)
 
-        btnSubmeter.disabled = false
         btnProx.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
@@ -152,58 +144,56 @@
         document.getElementById("spanRegiaoAtual").innerHTML = questaoAtual.regiao;
         const img = document.getElementById("imgPokemon");
         img.src = questaoAtual.imagem;
-        img.classList.remove("revelado")
+        img.classList.remove("revelado");
+        document.getElementById("spanRevelacao").innerHTML = "";
 
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
 
-
-
-        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+        const botoes = document.querySelectorAll(".btn-opcao");
+        botoes[0].innerHTML = questaoAtual.alternativaA;
+        botoes[1].innerHTML = questaoAtual.alternativaB;
+        botoes[2].innerHTML = questaoAtual.alternativaC;
+        botoes[3].innerHTML = questaoAtual.alternativaD;
     }
 
-    function submeter() {
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+    function selecionarResposta(botaoClicado) {
+        habilitarAlternativas(false); // [ALTERADO] Trava os botões logo no clique
+        btnProx.disabled = false;
 
-        let hasChecked = false
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                hasChecked = true
-                break
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual];
 
-            }
-        }
+        // [ALTERADO] Revela o Pokémon e o texto imediatamente (sem precisar procurar a opção correta antes)
+        document.getElementById("spanRevelacao").innerHTML = questaoAtual.revelacao || "";
+        document.getElementById("imgPokemon").classList.add("revelado");
 
-        if (!hasChecked) {
-            alert("Não há alternativas escolhidas. Escolha uma opção.")
+        // [ALTERADO] Compara direto o value do botão clicado, sem loop e sem adicionar classes de cor verde/vermelha
+        if (botaoClicado.value === questaoAtual.alternativaCorreta) {
+            pontuacaoFinal++;
+            certas++;
+            document.getElementById("spanCertas").innerHTML = certas;
         } else {
-            btnSubmeter.disabled = true
-            btnProx.disabled = false
-
-            habilitarAlternativas(false)
-
-            checarResposta()
+            tentativaIncorreta++;
+            erradas++;
+            document.getElementById("spanErradas").innerHTML = erradas;
         }
+
+        numeroDaQuestaoAtual++;
     }
 
     function habilitarAlternativas(trueOrFalse) {
         let opcaoEscolhida = trueOrFalse ? false : true
 
-        primeiraOpcao.disabled = opcaoEscolhida
-        segundaOpcao.disabled = opcaoEscolhida
-        terceiraOpcao.disabled = opcaoEscolhida
-        quartaOpcao.disabled = opcaoEscolhida
+        const botoes = document.querySelectorAll(".btn-opcao");
+        botoes.forEach((btn) => {
+            btn.disabled = opcaoEscolhida;
+        });
 
     }
 
     function avancar() {
         btnProx.disabled = true
-        btnSubmeter.disabled = false
 
-        desmarcarRadioButtons()
 
         if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
@@ -213,7 +203,6 @@
         } else {
             finalizarJogo()
         }
-        limparCoresBackgroundOpcoes()
     }
 
     function tentarNovamente() {
@@ -221,60 +210,8 @@
         window.location.reload()
     }
 
-    function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
 
-        const options = document.getElementsByName("option"); // recupera alternativas no html
 
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
-
-        
-        document.getElementById("spanRevelacao").innerHTML = questaoAtual.revelacao;
-
-        options.forEach((option) => {
-            if (option.value === respostaQuestaoAtual) {
-                document.getElementById("imgPokemon").classList.add("revelado");
-                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-                alternativaCorreta = option.labels[0].id
-            }
-        })
-
-        // verifica se resposta assinalada é correta
-        options.forEach((option) => {
-            if (option.checked === true && option.value === respostaQuestaoAtual) {
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
-                numeroDaQuestaoAtual++
-            } else if (option.checked && option.value !== respostaQuestaoAtual) {
-                const wrongLabelId = option.labels[0].id
-
-                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                tentativaIncorreta++
-                erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
-                numeroDaQuestaoAtual++
-            }
-        })
-    }
-
-    function limparCoresBackgroundOpcoes() {
-        const options = document.getElementsByName("option");
-        options.forEach((option) => {
-            document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
-            document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
-        })
-    }
-
-    function desmarcarRadioButtons() {
-        const options = document.getElementsByName("option");
-        for (let i = 0; i < options.length; i++) {
-            options[i].checked = false;
-        }
-    }
 
     function finalizarJogo() {
         let textoParaMensagemFinal = null
@@ -304,7 +241,6 @@
         document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
-        btnSubmeter.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 

@@ -1,92 +1,201 @@
-/* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
-/* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
-:root {
-    --primary-brand-color: #ED145B;
-    --secondary-brand-color: #0762C8;
-    --success: #198754;
-    --success-dark: #095c36;
-    --success-light: #9dd3ba;
-    --warning: #ffc107;
-    --warning-dark: #705400;
-    --warning-light: #fdebb3;
-    --danger: #dc3545;
-    --danger-dark: #990c19;
-    --danger-light: #f0c1c6;
-    --new-gray: #CCCCCC;
-    --new-black: #212427;
-    --new-white: #E8E8E8;
-}
 
 body {
-    color: var(--new-black);
-    background-color: var(--new-white);
+    min-height: 100vh;
+    color: #f4f6f9;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
 
-button {
-    font-family: monospace;
-    font-weight: bold;
-}
-
-.flex-colunar {
+    background:
+        linear-gradient(to right, #0a1128 20%, rgba(10, 17, 40, 0.35) 100%),
+        url('./assets/imgs/QuemEEssePokemon.png') center / cover no-repeat;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pontuacaoEJogo {
+    width: 100%;
+    max-width: 1300px;
+    padding: 40px 60px;
+}
+
+
+.tela-inicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+#btnIniciarQuiz {
+    padding: 24px 48px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    border: none;
+    border-radius: 16px;
+    background-color: #ffffff;
+    color: #0a1128;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease;
+}
+
+#btnIniciarQuiz:hover {
+    transform: scale(1.05);
+}
+
+
+.container-quiz {
+    display: none; /* Antes estava display: grid; */
+    grid-template-columns: 1fr 1.15fr;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+}
+
+
+.coluna-esquerda {
+    display: grid;
     flex-direction: column;
+    gap: 16px;
 }
 
-.width-fit-content {
-    width: fit-content;
-}
 
-.border-primary {
-    border: 3px solid var(--primary-brand-color);
-}
-
-.border-secondary {
-    border: 3px solid var(--secondary-brand-color);
-}
-
-.padding-8 {
-    padding: 8px;
-}
-
-.text-bold {
+.placar {
+    font-size: 0.95rem;
+    color: #ffcb05;
     font-weight: bold;
 }
 
-.text-success-with-bg {
-    color: var(--success-dark);
-    background-color: var(--success-light);
-}
 
-.text-warning-with-bg {
-    color: var(--warning-dark);
-    background-color: var(--warning-light);
-}
-
-.text-danger-with-bg {
-    color: var(--danger-dark);
-    background-color: var(--danger-light);
-}
-
-.text-new-gray {
-    color: var(--new-gray);
+.subtitulo-regiao {
+    font-size: 1rem;
+    color: #d1d5db;
+    margin-bottom: 0px;
 }
 
 
+.titulo-pergunta {
+    font-size: 2.0rem;
+    font-weight: 900;
+    font-style: Bangers;
+    line-height: 1.1;
+    color: #ffffff;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
+    margin-bottom: 12px;
+}
+
+.texto-revelacao {
+    display: block;
+    min-height: 28px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffcb05;
+    margin-bottom: 16px;
+}
+
+
+.box-pokemon {
+    display: grid;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#imgPokemon {
+    width: 440px;
+    height: 400px;
+    object-fit: contain;
+}
 
 .silhueta {
     filter: brightness(0);
     transition: filter 0.9s ease;
     user-select: none;
-    -webkit-user-drag: none; /* Evita que o usuário arraste a imagem para ver a cor */
-}
-
-.nomeOculto{
-    visibility: hidden;
+    -webkit-user-drag: none;
 }
 
 .revelado {
     filter: brightness(1);
 }
 
+/* --- COLUNA DA DIREITA --- */
+.coluna-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.instrucao-opcoes {
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+
+.opcoes {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 22px;
+}
+
+
+.btn-opcao {
+    width: 100%;
+    min-height: 135px;
+    background-color: #ffffff;
+    color: #0a1128;
+    border: none;
+    border-radius: 18px;
+    padding: 24px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+.btn-opcao:hover:not(:disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.btn-opcao:disabled {
+    cursor: default;
+    opacity: 0.85;
+}
+
+
+.controles-quiz {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.btn-acao {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #0a1128;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn-acao:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+
+.alinhamento{
+    display: grid;
+}
