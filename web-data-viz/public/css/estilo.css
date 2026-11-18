@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  background-color: #0a1128;
 }
 
 :root {
@@ -471,6 +471,12 @@ input {
     url(../assets/imgs/MapaGalar.png)center / cover no-repeat;
 
 }
+
+.corte {
+  background-color: rgba(10, 17, 40, 0.8);
+  margin: 0; 
+}
+
 
 
 
