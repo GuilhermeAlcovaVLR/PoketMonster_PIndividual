@@ -472,6 +472,34 @@ input {
 
 }
 
+
+.tela-inicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30vh;
+    background: 
+       linear-gradient(to left,
+      rgba(255, 255, 255, 0.21),
+      #0a1128),
+    url(../assets/imgs/QuemEEssePokemon.png)center / cover no-repeat;
+}
+#btnIniciarQuiz {
+    padding: 24px 48px;
+    font-size: 1.0rem;
+    font-weight: 900;
+    border: none;
+    border-radius: 16px;
+    background-color: #ffffff;
+    color: #0a1128;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease;
+}
+#btnIniciarQuiz:hover {
+    transform: scale(1.05);
+}
+
 .corte {
   background-color: rgba(10, 17, 40, 0.8);
   margin: 0; 
