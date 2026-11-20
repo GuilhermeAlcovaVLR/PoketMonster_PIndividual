@@ -25,6 +25,10 @@ body {
 .header {
   height: var(--tamanho-header);
   border-bottom: 2px solid #ffcb05;
+  position: sticky;
+  top: 0;
+  background-color: #0a1128;
+
 }
 
 .header .container {
@@ -40,6 +44,12 @@ body {
 
 .agora {
   font-weight: 800;
+    list-style: none;
+  color: #e3b062;
+  background-color: 
+  linear-gradient(to left,
+      rgba(255, 255, 255, 0.11),#0a1128
+    );
 }
 
 .navbar {
@@ -395,8 +405,8 @@ input {
   background:
 
     linear-gradient(to left,
-      rgba(255, 255, 255, 0.11),
-      #0a1128),
+      rgba(255, 255, 255, 0.11),#0a1128
+    ),
     url(../assets/imgs/MapaKanto.png)center / cover no-repeat;
 
 }

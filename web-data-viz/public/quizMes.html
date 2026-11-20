@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
     <link rel="stylesheet" href="style.css">
-    
+
 </head>
 
 
 <body onload="onloadEsconder()">
+<script>
+          if (sessionStorage.getItem("usuario_autenticado") != "true") {
+        window.location.replace("login.html");
+      }
+      
+</script>
+
     <div id="pontuacaoEJogo">
         <div class="tela-inicial" id="telaInicial">
             <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
@@ -74,498 +81,377 @@
 </html>
 <script>
     const listaDeQuestoes = [
-    {
-        geracao: 1,
-        regiao: "Kanto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O PIKACHU!",
-        imagem: "./assets/imgs/Pikachu.png",
-        alternativaA: "Gengar",
-        alternativaB: "Nidorino",
-        alternativaC: "Pikachu",
-        alternativaD: "Eevee",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 1,
-        regiao: "Kanto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O BLASTOISE!",
-        imagem: "./assets/imgs/Blastoise.png",
-        alternativaA: "Charizard",
-        alternativaB: "Nidoking",
-        alternativaC: "Mankey",
-        alternativaD: "Blastoise",
-        alternativaCorreta: "alternativaD"
-    },
-    {
-        geracao: 1,
-        regiao: "Kanto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O PSYDUCK!",
-        imagem: "./assets/imgs/Psyduck.png",
-        alternativaA: "Psyduck",
-        alternativaB: "Magikarp",
-        alternativaC: "Charmander",
-        alternativaD: "Pidgey",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 1,
-        regiao: "Kanto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O SCYTHER!",
-        imagem: "./assets/imgs/Scyther.png",
-        alternativaA: "Scyther",
-        alternativaB: "Horsea",
-        alternativaC: "Bulbasaur",
-        alternativaD: "Spearow",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 1,
-        regiao: "Kanto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O DRAGONITE!",
-        imagem: "./assets/imgs/dragonite.png",
-        alternativaA: "Mew",
-        alternativaB: "Dragonite",
-        alternativaC: "Dratini",
-        alternativaD: "Mewtwo",
-        alternativaCorreta: "alternativaB"
-    },
- 
+        {
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PIKACHU!",
+            imagem: "./assets/imgs/Pikachu.png",
+            alternativaA: "Gengar",
+            alternativaB: "Nidorino",
+            alternativaC: "Pikachu",
+            alternativaD: "Eevee",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O BLASTOISE!",
+            imagem: "./assets/imgs/Blastoise.png",
+            alternativaA: "Charizard",
+            alternativaB: "Nidoking",
+            alternativaC: "Mankey",
+            alternativaD: "Blastoise",
+            alternativaCorreta: "alternativaD"
+        },
+        {
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PSYDUCK!",
+            imagem: "./assets/imgs/Psyduck.png",
+            alternativaA: "Psyduck",
+            alternativaB: "Magikarp",
+            alternativaC: "Charmander",
+            alternativaD: "Pidgey",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O SCYTHER!",
+            imagem: "./assets/imgs/Scyther.png",
+            alternativaA: "Scyther",
+            alternativaB: "Horsea",
+            alternativaC: "Bulbasaur",
+            alternativaD: "Spearow",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 1,
+            regiao: "Kanto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O DRAGONITE!",
+            imagem: "./assets/imgs/dragonite.png",
+            alternativaA: "Mew",
+            alternativaB: "Dragonite",
+            alternativaC: "Dratini",
+            alternativaD: "Mewtwo",
+            alternativaCorreta: "alternativaB"
+        },
 
-    {
-        geracao: 2,
-        regiao: "Johto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TOTODILE!",
-        imagem: "./assets/imgs/Totodile.png",
-        alternativaA: "Typhlosion",
-        alternativaB: "Totodile",
-        alternativaC: "Croconaw",
-        alternativaD: "Meganium",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 2,
-        regiao: "Johto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O HERACROSS!",
-        imagem: "./assets/imgs/Heracroos.png",
-        alternativaA: "Quilava",
-        alternativaB: "Mareep",
-        alternativaC: "Pichu",
-        alternativaD: "Heracross",
-        alternativaCorreta: "alternativaD"
-    },
-    {
-        geracao: 2,
-        regiao: "Johto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O KINGDRA!",
-        imagem: "./assets/imgs/Kingdra.png",
-        alternativaA: "Quilava",
-        alternativaB: "Kingdra",
-        alternativaC: "Feraligatr",
-        alternativaD: "Cyndaquil",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 2,
-        regiao: "Johto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O UMBREON!",
-        imagem: "./assets/imgs/Umbreon.png",
-        alternativaA: "Vaporeon",
-        alternativaB: "Jolteon",
-        alternativaC: "Espeon",
-        alternativaD: "Umbreon",
-        alternativaCorreta: "alternativaD"
-    },
-    {
-        geracao: 2,
-        regiao: "Johto",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O AMPHAROS!",
-        imagem: "./assets/imgs/Ampharos.png",
-        alternativaA: "Ampharos",
-        alternativaB: "Pupitar",
-        alternativaC: "Espeon",
-        alternativaD: "Entei",
-        alternativaCorreta: "alternativaA"
-    },
 
-    {
-        geracao: 3,
-        regiao: "Hoenn",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TREECKO!",
-        imagem: "./assets/imgs/Trecko.png",
-        alternativaA: "Torchic",
-        alternativaB: "Mudkip",
-        alternativaC: "Treecko",
-        alternativaD: "Sceptile",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 3,
-        regiao: "Hoenn",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O SLAKING!",
-        imagem: "./assets/imgs/Slaking.png",
-        alternativaA: "Beldum",
-        alternativaB: "Latias",
-        alternativaC: "Latios",
-        alternativaD: "Slaking",
-        alternativaCorreta: "alternativaD"
-    },
-    {
-        geracao: 3,
-        regiao: "Hoenn",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É A GARDEVOIR!",
-        imagem: "./assets/imgs/Gardevoir.png",
-        alternativaA: "Gardevoir",
-        alternativaB: "Kirlia",
-        alternativaC: "Gallade",
-        alternativaD: "Ralts",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 3,
-        regiao: "Hoenn",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O HARIYAMA!",
-        imagem: "./assets/imgs/Haryama.png",
-        alternativaA: "Makuhita",
-        alternativaB: "Hariyama",
-        alternativaC: "Machamp",
-        alternativaD: "Medicham",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 3,
-        regiao: "Hoenn",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O ABSOL!",
-        imagem: "./assets/imgs/Absol.png",
-        alternativaA: "Mightyena",
-        alternativaB: "Zangoose",
-        alternativaC: "Absol",
-        alternativaD: "Umbreon",
-        alternativaCorreta: "alternativaC"
-    },
+        {
+            geracao: 2,
+            regiao: "Johto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O TOTODILE!",
+            imagem: "./assets/imgs/Totodile.png",
+            alternativaA: "Typhlosion",
+            alternativaB: "Totodile",
+            alternativaC: "Croconaw",
+            alternativaD: "Meganium",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 2,
+            regiao: "Johto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O HERACROSS!",
+            imagem: "./assets/imgs/Heracroos.png",
+            alternativaA: "Quilava",
+            alternativaB: "Mareep",
+            alternativaC: "Pichu",
+            alternativaD: "Heracross",
+            alternativaCorreta: "alternativaD"
+        },
+        {
+            geracao: 2,
+            regiao: "Johto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O KINGDRA!",
+            imagem: "./assets/imgs/Kingdra.png",
+            alternativaA: "Quilava",
+            alternativaB: "Kingdra",
+            alternativaC: "Feraligatr",
+            alternativaD: "Cyndaquil",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 2,
+            regiao: "Johto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O UMBREON!",
+            imagem: "./assets/imgs/Umbreon.png",
+            alternativaA: "Vaporeon",
+            alternativaB: "Jolteon",
+            alternativaC: "Espeon",
+            alternativaD: "Umbreon",
+            alternativaCorreta: "alternativaD"
+        },
+        {
+            geracao: 2,
+            regiao: "Johto",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O AMPHAROS!",
+            imagem: "./assets/imgs/Ampharos.png",
+            alternativaA: "Ampharos",
+            alternativaB: "Pupitar",
+            alternativaC: "Espeon",
+            alternativaD: "Entei",
+            alternativaCorreta: "alternativaA"
+        },
 
-    // --- GERAÇÃO 4: SINNOH (5) ---
-    {
-        geracao: 4,
-        regiao: "Sinnoh",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O LUXRAY!",
-        imagem: "./assets/imgs/Luxray.png",
-        alternativaA: "Luxio",
-        alternativaB: "Luxray",
-        alternativaC: "Electabuzz",
-        alternativaD: "Jolteon",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 4,
-        regiao: "Sinnoh",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O INFERNAPE!",
-        imagem: "./assets/imgs/Infernape.png",
-        alternativaA: "Empoleon",
-        alternativaB: "Monferno",
-        alternativaC: "Infernape",
-        alternativaD: "Blaziken",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 4,
-        regiao: "Sinnoh",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O EMPOLEON!",
-        imagem: "./assets/imgs/Empoleon.png",
-        alternativaA: "Samurott",
-        alternativaB: "Empoleon",
-        alternativaC: "Piplup",
-        alternativaD: "Prinplup",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 4,
-        regiao: "Sinnoh",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O RIOLU!",
-        imagem: "./assets/imgs/Riolu.png",
-        alternativaA: "Lucario",
-        alternativaB: "Riolu",
-        alternativaC: "Pancham",
-        alternativaD: "Mankey",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 4,
-        regiao: "Sinnoh",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O DARKRAI!",
-        imagem: "./assets/imgs/Darkai.png",
-        alternativaA: "Latios",
-        alternativaB: "Darkrai",
-        alternativaC: "Pancham",
-        alternativaD: "Primeape",
-        alternativaCorreta: "alternativaB"
-    },
+        {
+            geracao: 3,
+            regiao: "Hoenn",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O TREECKO!",
+            imagem: "./assets/imgs/Trecko.png",
+            alternativaA: "Torchic",
+            alternativaB: "Mudkip",
+            alternativaC: "Treecko",
+            alternativaD: "Sceptile",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            geracao: 3,
+            regiao: "Hoenn",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O SLAKING!",
+            imagem: "./assets/imgs/Slaking.png",
+            alternativaA: "Beldum",
+            alternativaB: "Latias",
+            alternativaC: "Latios",
+            alternativaD: "Slaking",
+            alternativaCorreta: "alternativaD"
+        },
+        {
+            geracao: 3,
+            regiao: "Hoenn",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É A GARDEVOIR!",
+            imagem: "./assets/imgs/Gardevoir.png",
+            alternativaA: "Gardevoir",
+            alternativaB: "Kirlia",
+            alternativaC: "Gallade",
+            alternativaD: "Ralts",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 3,
+            regiao: "Hoenn",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O HARIYAMA!",
+            imagem: "./assets/imgs/Haryama.png",
+            alternativaA: "Makuhita",
+            alternativaB: "Hariyama",
+            alternativaC: "Machamp",
+            alternativaD: "Medicham",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 3,
+            regiao: "Hoenn",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O ABSOL!",
+            imagem: "./assets/imgs/Absol.png",
+            alternativaA: "Mightyena",
+            alternativaB: "Zangoose",
+            alternativaC: "Absol",
+            alternativaD: "Umbreon",
+            alternativaCorreta: "alternativaC"
+        },
 
-    // --- GERAÇÃO 5: UNOVA (5) ---
-    {
-        geracao: 5,
-        regiao: "Unova",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O SNIVY!",
-        imagem: "./assets/imgs/Snivy.png",
-        alternativaA: "Oshawott",
-        alternativaB: "Snivy",
-        alternativaC: "Tepig",
-        alternativaD: "Pignite",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 5,
-        regiao: "Unova",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O KROOKODILE!",
-        imagem: "./assets/imgs/Krokodile.png",
-        alternativaA: "Sandile",
-        alternativaB: "Krokorok",
-        alternativaC: "Krookodile",
-        alternativaD: "Gible",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 5,
-        regiao: "Unova",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O PALPITOAD!",
-        imagem: "./assets/imgs/Palpitoad.png",
-        alternativaA: "Palpitoad",
-        alternativaB: "Seismitoad",
-        alternativaC: "Tympole",
-        alternativaD: "Poliwag",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 5,
-        regiao: "Unova",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O LILLIPUP!",
-        imagem: "./assets/imgs/Lilipup.png",
-        alternativaA: "Lillipup",
-        alternativaB: "Herdier",
-        alternativaC: "Growlithe",
-        alternativaD: "Poochyena",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 5,
-        regiao: "Unova",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O WATCHOG!",
-        imagem: "./assets/imgs/Watchog.png",
-        alternativaA: "Patrat",
-        alternativaB: "Furret",
-        alternativaC: "Bibarel",
-        alternativaD: "Watchog",
-        alternativaCorreta: "alternativaD"
-    },
+        // --- GERAÇÃO 4: SINNOH (5) ---
+        {
+            geracao: 4,
+            regiao: "Sinnoh",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O LUXRAY!",
+            imagem: "./assets/imgs/Luxray.png",
+            alternativaA: "Luxio",
+            alternativaB: "Luxray",
+            alternativaC: "Electabuzz",
+            alternativaD: "Jolteon",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 4,
+            regiao: "Sinnoh",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O INFERNAPE!",
+            imagem: "./assets/imgs/Infernape.png",
+            alternativaA: "Empoleon",
+            alternativaB: "Monferno",
+            alternativaC: "Infernape",
+            alternativaD: "Blaziken",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            geracao: 4,
+            regiao: "Sinnoh",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O EMPOLEON!",
+            imagem: "./assets/imgs/Empoleon.png",
+            alternativaA: "Samurott",
+            alternativaB: "Empoleon",
+            alternativaC: "Piplup",
+            alternativaD: "Prinplup",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 4,
+            regiao: "Sinnoh",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O RIOLU!",
+            imagem: "./assets/imgs/Riolu.png",
+            alternativaA: "Lucario",
+            alternativaB: "Riolu",
+            alternativaC: "Pancham",
+            alternativaD: "Mankey",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 4,
+            regiao: "Sinnoh",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O DARKRAI!",
+            imagem: "./assets/imgs/Darkai.png",
+            alternativaA: "Latios",
+            alternativaB: "Darkrai",
+            alternativaC: "Pancham",
+            alternativaD: "Primeape",
+            alternativaCorreta: "alternativaB"
+        },
 
-    // --- GERAÇÃO 6: KALOS (5) ---
-    {
-        geracao: 6,
-        regiao: "Kalos",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O GRENINJA!",
-        imagem: "./assets/imgs/Greninja.png",
-        alternativaA: "Froakie",
-        alternativaB: "Frogadier",
-        alternativaC: "Greninja",
-        alternativaD: "Seismitoad",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 6,
-        regiao: "Kalos",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O NOIBAT!",
-        imagem: "./assets/imgs/noibat.png",
-        alternativaA: "Noibat",
-        alternativaB: "Noivern",
-        alternativaC: "Zubat",
-        alternativaD: "Crobat",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 6,
-        regiao: "Kalos",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O HAWLUCHA!",
-        imagem: "./assets/imgs/Hawlucha.png",
-        alternativaA: "Hawlucha",
-        alternativaB: "Pikachu",
-        alternativaC: "Houndoom",
-        alternativaD: "Braviary",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 6,
-        regiao: "Kalos",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O PANCHAM!",
-        imagem: "./assets/imgs/Pancham.png",
-        alternativaA: "Pangoro",
-        alternativaB: "Pancham",
-        alternativaC: "Mankey",
-        alternativaD: "Riolu",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 6,
-        regiao: "Kalos",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TALONFLAME!",
-        imagem: "./assets/imgs/Talonflame.png",
-        alternativaA: "Fletchinder",
-        alternativaB: "Talonflame",
-        alternativaC: "Staraptor",
-        alternativaD: "Pidgeot",
-        alternativaCorreta: "alternativaB"
-    },
+        // --- GERAÇÃO 5: UNOVA (5) ---
+        {
+            geracao: 5,
+            regiao: "Unova",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O SNIVY!",
+            imagem: "./assets/imgs/Snivy.png",
+            alternativaA: "Oshawott",
+            alternativaB: "Snivy",
+            alternativaC: "Tepig",
+            alternativaD: "Pignite",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 5,
+            regiao: "Unova",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O KROOKODILE!",
+            imagem: "./assets/imgs/Krokodile.png",
+            alternativaA: "Sandile",
+            alternativaB: "Krokorok",
+            alternativaC: "Krookodile",
+            alternativaD: "Gible",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            geracao: 5,
+            regiao: "Unova",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PALPITOAD!",
+            imagem: "./assets/imgs/Palpitoad.png",
+            alternativaA: "Palpitoad",
+            alternativaB: "Seismitoad",
+            alternativaC: "Tympole",
+            alternativaD: "Poliwag",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 5,
+            regiao: "Unova",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O LILLIPUP!",
+            imagem: "./assets/imgs/Lilipup.png",
+            alternativaA: "Lillipup",
+            alternativaB: "Herdier",
+            alternativaC: "Growlithe",
+            alternativaD: "Poochyena",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 5,
+            regiao: "Unova",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O WATCHOG!",
+            imagem: "./assets/imgs/Watchog.png",
+            alternativaA: "Patrat",
+            alternativaB: "Furret",
+            alternativaC: "Bibarel",
+            alternativaD: "Watchog",
+            alternativaCorreta: "alternativaD"
+        },
 
-    {
-        geracao: 7,
-        regiao: "Alola",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O LITTEN!",
-        imagem: "./assets/imgs/Litten.png",
-        alternativaA: "Rowlet",
-        alternativaB: "Popplio",
-        alternativaC: "Litten",
-        alternativaD: "Torchic",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 7,
-        regiao: "Alola",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TAPU KOKO!",
-        imagem: "./assets/imgs/TapuKoko.png",
-        alternativaA: "Tapu Lele",
-        alternativaB: "Tapu Koko",
-        alternativaC: "Tapu Bulu",
-        alternativaD: "Tapu Fini",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 7,
-        regiao: "Alola",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O MIMIKYU!",
-        imagem: "./assets/imgs/Mimikyu.png",
-        alternativaA: "Banette",
-        alternativaB: "Mimikyu",
-        alternativaC: "Duskull",
-        alternativaD: "Shuppet",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 7,
-        regiao: "Alola",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TOUCANNON!",
-        imagem: "./assets/imgs/Toucannon.png",
-        alternativaA: "Pidgeot",
-        alternativaB: "Toucannon",
-        alternativaC: "Chatot",
-        alternativaD: "Noibat",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        geracao: 7,
-        regiao: "Alola",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O LYCANROC!",
-        imagem: "./assets/imgs/Laycronc.png",
-        alternativaA: "Rockruff",
-        alternativaB: "Mightyena",
-        alternativaC: "Lycanroc",
-        alternativaD: "Zoroark",
-        alternativaCorreta: "alternativaC"
-    },
+        // --- GERAÇÃO 6: KALOS (5) ---
+        {
+            geracao: 6,
+            regiao: "Kalos",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O GRENINJA!",
+            imagem: "./assets/imgs/Greninja.png",
+            alternativaA: "Froakie",
+            alternativaB: "Frogadier",
+            alternativaC: "Greninja",
+            alternativaD: "Seismitoad",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            geracao: 6,
+            regiao: "Kalos",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O NOIBAT!",
+            imagem: "./assets/imgs/noibat.png",
+            alternativaA: "Noibat",
+            alternativaB: "Noivern",
+            alternativaC: "Zubat",
+            alternativaD: "Crobat",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 6,
+            regiao: "Kalos",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O HAWLUCHA!",
+            imagem: "./assets/imgs/Hawlucha.png",
+            alternativaA: "Hawlucha",
+            alternativaB: "Pikachu",
+            alternativaC: "Houndoom",
+            alternativaD: "Braviary",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            geracao: 6,
+            regiao: "Kalos",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O PANCHAM!",
+            imagem: "./assets/imgs/Pancham.png",
+            alternativaA: "Pangoro",
+            alternativaB: "Pancham",
+            alternativaC: "Mankey",
+            alternativaD: "Riolu",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            geracao: 6,
+            regiao: "Kalos",
+            pergunta: "QUEM É ESSE POKÉMON?",
+            revelacao: "É O TALONFLAME!",
+            imagem: "./assets/imgs/Talonflame.png",
+            alternativaA: "Fletchinder",
+            alternativaB: "Talonflame",
+            alternativaC: "Staraptor",
+            alternativaD: "Pidgeot",
+            alternativaCorreta: "alternativaB"
+        },
 
-    {
-        geracao: 8,
-        regiao: "Galar",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O CORVIKNIGHT!",
-        imagem: "./assets/imgs/Corvinight.png",
-        alternativaA: "Murkrow",
-        alternativaB: "Rookidee",
-        alternativaC: "Corviknight",
-        alternativaD: "Honchkrow",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 8,
-        regiao: "Galar",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O RILLABOOM!",
-        imagem: "./assets/imgs/Rillabom.png",
-        alternativaA: "Rillaboom",
-        alternativaB: "Greedent",
-        alternativaC: "Pansage",
-        alternativaD: "Tangrowth",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        geracao: 8,
-        regiao: "Galar",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O SIRFETCH'D!",
-        imagem: "./assets/imgs/Sirfeth.png",
-        alternativaA: "Galarian Farfetch'd",
-        alternativaB: "Farfetch'd",
-        alternativaC: "Sirfetch'd",
-        alternativaD: "Gallade",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 8,
-        regiao: "Galar",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O EISCUE!",
-        imagem: "./assets/imgs/Eiscue.png",
-        alternativaA: "Piplup",
-        alternativaB: "Delibird",
-        alternativaC: "Eiscue",
-        alternativaD: "TUX",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        geracao: 8,
-        regiao: "Galar",
-        pergunta: "QUEM É ESSE POKÉMON?",
-        revelacao: "É O TOXTRICITY!",
-        imagem: "./assets/imgs/Toxcrit.png",
-        alternativaA: "Toxel",
-        alternativaB: "Toxtricity",
-        alternativaC: "Salazzle",
-        alternativaD: "Drapion",
-        alternativaCorreta: "alternativaB"
-    }
-];
+    ];
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
@@ -574,6 +460,9 @@
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
+    let certaRegiao = {
+        'Kanto': 0, 'Johto': 0, 'Hoenn': 0, 'Sinnoh': 0, 'Unova': 0, 'Kalos': 0
+    }
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
@@ -635,6 +524,9 @@
             pontuacaoFinal++;
             certas++;
             document.getElementById("spanCertas").innerHTML = certas;
+
+            certaRegiao[questaoAtual.regiao]++;
+
         } else {
             tentativaIncorreta++;
             erradas++;
