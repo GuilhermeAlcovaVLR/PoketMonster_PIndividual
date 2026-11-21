@@ -54,6 +54,106 @@ var conteudosKanto = {
     }
 }
 
+var conteudosJohto = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "SIM"
+    }
+}
+
+var conteudosHoenn = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "SIM"
+    }
+}
+
+var conteudosSinnoh = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "SIM"
+    }
+}
+
+var conteudosUnova = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "SIM"
+    }
+}
+
+var conteudosKalos = {
+    lore:{
+        titulo: "Kanto",
+        texto: "Insetos, tajiri, onde tudo começa"
+    },
+    Anime:{
+        titulo: "anime",
+        texto: "Anime"
+
+    },
+    Iniciais:{
+        titulo:"A escolha mais dificil",
+        texto: "Squirtle"
+    },
+    Inovacoes:{
+        titulo: "Inovações",
+        texto: "mega"
+    }
+}
+
 
 function abrirPopUp(card){
     var conteudo =conteudosKanto[card];
@@ -64,6 +164,52 @@ function abrirPopUp(card){
     }
 }
 
+
+function abrirPopUpJohto(card){
+    var conteudo =conteudosJohto[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
+
+function abrirPopUpHoenn(card){
+    var conteudo =conteudosHoenn[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
+
+
+function abrirPopUpSinnoh(card){
+    var conteudo =conteudosSinnoh[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
+
+function abrirPopUpUnova(card){
+    var conteudo =conteudosUnova[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
+
+function abrirPopUpKalos(card){
+    var conteudo =conteudosKalos[card];
+    if (conteudo) {
+        document.getElementById("popup-titulo").innerText = conteudo.titulo;
+        document.getElementById("popup-texto").innerText = conteudo.texto;
+        document.getElementById("popup").showModal();
+    }
+}
 /* function fecharPopup() {
     document.getElementById("popup").close();
 }
