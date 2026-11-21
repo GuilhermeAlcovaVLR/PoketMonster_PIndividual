@@ -9,7 +9,7 @@ body {
 }
 
 :root {
-  --tamanho-header: 80px;
+  --tamanho-header: 50px;
   --tamanho-banner: calc(110vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
@@ -599,7 +599,7 @@ input {
   .paragrafo_ {
 
     font-size: 16px;
-
+    white-space: normal
   }
 
 
@@ -620,3 +620,64 @@ input {
     padding: 20px;
   }
 }
+
+.estilo_pop {
+  border: 3px solid #ffcb05; 
+  border-radius: 16px;
+  padding: 0.5rem; /* Tiramos o padding daqui para colocar na div interna */
+  background-color: #0a1128;
+  color: #ffffff;
+ 
+  /* Tamanho e responsividade */
+  width: 90%;
+  max-width: 500px;
+  
+  /* Sombra para dar profundidade */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  
+  /* Animação suave ao abrir */
+  animation: aparecerModal 0.9s ease-out;
+}
+
+.estilo_pop::backdrop {
+  background-color: rgba(5, 8, 20, 0.8); /* Azul bem escuro translúcido */
+  backdrop-filter: blur(4px); /* Efeito de desfoque no fundo da página */
+}
+
+.modal-conteudo {
+   /* Necessário para posicionar o botão "X" no canto */
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: 'Barlow', sans-serif;
+}
+.modal-conteudo h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  letter-spacing: 1.0px;
+  margin: 0;
+}
+
+.btn-fechar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  
+  background-color: #EE1515;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 50%; /* Deixa o botão redondo */
+  
+  width: 32px;
+  height: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  
+  /* Centraliza o "X" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
