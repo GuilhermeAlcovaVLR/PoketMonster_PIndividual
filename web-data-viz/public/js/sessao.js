@@ -66,10 +66,10 @@ lore: {
         <p><img src="./assets/imgs/iniciais/charmander.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/charmeleon.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/charizard.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/squirtle.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/wartotle.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/blastoise.png" width="150" height="120" alt="Feraligatr "></p>`
     },
-    Inovacoes: {
-        titulo: "Inovações",
-        texto: "SIM"
-    }
+    lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/144.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/145.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/146.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/150.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/151.png" width="150" height="150" alt="Quilava "></p>`    }
 }
 
 var conteudosJohto = {
@@ -93,6 +93,12 @@ var conteudosJohto = {
         <p><img src="./assets/imgs/iniciais/cyndaquil.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/quilava.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/typlosion.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/totodile.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/croconow.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/feraligtr.png" width="150" height="120" alt="Feraligatr "></p>`
     },
+        lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/243.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/244.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/245.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/249.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/250.png" width="150" height="150" alt="Quilava "><img src="./assets/imgs/iniciais/251.png" width="150" height="150" alt="Cyndaquil "></p>`  
+      }
+
 
 }
 
@@ -121,10 +127,13 @@ var conteudosHoenn = {
         <p><img src="./assets/imgs/iniciais/torchic.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/combusquen.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/blaziken.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/mudkip.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/marstomp.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/swampert.png" width="150" height="120" alt="Feraligatr "></p>`
     },
-    Inovacoes: {
-        titulo: "Inovações",
-        texto: "SIM"
-    }
+   lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/377.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/378.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/379.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/380.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/381.png" width="150" height="150" alt="Quilava "></p>
+        <p><img src="./assets/imgs/iniciais/382.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/383.png" width="150" height="150" alt="Quilava "><img src="./assets/imgs/iniciais/384.png" width="150" height="150" alt="Cyndaquil "></p>
+        `  
+      }
 }
 
 var conteudosSinnoh = {
@@ -152,10 +161,12 @@ lore: {
         <p><img src="./assets/imgs/iniciais/chimchar.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/monferno.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/infernape.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/piplup.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/prinplup.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/empoleon.png" width="150" height="120" alt="Feraligatr "></p>`
     },
-    Inovacoes: {
-        titulo: "Inovações",
-        texto: "SIM"
-    }
+  lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/480.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/481.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/482.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/483.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/484.png" width="150" height="150" alt="Quilava "><img src="./assets/imgs/iniciais/487.png" width="150" height="150" alt="Quilava "></p>
+        <p><img src="./assets/imgs/iniciais/493.png" width="150" height="150" alt="Quilava "></p>`  
+      }
 }
 
 var conteudosUnova = {
@@ -183,10 +194,11 @@ var conteudosUnova = {
         <p><img src="./assets/imgs/iniciais/tepig.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/pignite.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/emboar.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/oshawatt.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/dewott.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/samurot.png" width="150" height="120" alt="Feraligatr "></p>`
     },
-    Inovacoes: {
-        titulo: "Inovações",
-        texto: "SIM"
-    }
+ lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/641.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/642.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/645.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/643.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/644.png" width="150" height="150" alt="Quilava "></p>`  
+      }
 }
 
 var conteudosKalos = {
@@ -214,10 +226,11 @@ var conteudosKalos = {
         <p><img src="./assets/imgs/iniciais/fennekin.png" width="150" height="120" alt="Cyndaquil "><img src="./assets/imgs/iniciais/breaki.png" width="150" height="120" alt="Quilava "><img src="./assets/imgs/iniciais/delphox.png" width="150" height="120" alt="Typhlosion "></p>
         <p><img src="./assets/imgs/iniciais/frokkie.png" width="150" height="120" alt="Totodile "><img src="./assets/imgs/iniciais/frogradier.png" width="150" height="120" alt="Croconaw "><img src="./assets/imgs/iniciais/greninja.png" width="150" height="120" alt="Feraligatr "></p>`
     },
-    Inovacoes: {
-        titulo: "Inovações",
-        texto: "mega"
-    }
+  lendarios: {
+         titulo: "A escolha mais dificil",
+        texto: `<p><img src="./assets/imgs/iniciais/716.png" width="150" height="150" alt="Chikorita"><img src="./assets/imgs/iniciais/717.png" width="150" height="150" alt="Bayleef "><img src="./assets/imgs/iniciais/718.png" width="150" height="150" alt="Meganium "></p>
+        <p><img src="./assets/imgs/iniciais/719.png" width="150" height="150" alt="Cyndaquil "><img src="./assets/imgs/iniciais/721.png" width="150" height="150" alt="Quilava "></p>`  
+      }
 }
 
 
