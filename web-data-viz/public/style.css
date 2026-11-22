@@ -12,12 +12,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0px;
 }
 
 #pontuacaoEJogo {
     width: 100%;
     max-width: 1300px;
-    padding: 40px 60px;
+    padding: 10px 20px;
 }
 
 
@@ -25,7 +26,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 60vh;
+    min-height: 50vh;
 }
 
 #btnIniciarQuiz {
@@ -47,10 +48,10 @@ body {
 
 
 .container-quiz {
-    display: none; /* Antes estava display: grid; */
+    display: none; 
     grid-template-columns: 1fr 1.15fr;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
     width: 100%;
 }
 
@@ -58,12 +59,12 @@ body {
 .coluna-esquerda {
     display: grid;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 
 .placar {
-    font-size: 0.95rem;
+    font-size: 0.70rem;
     color: #ffcb05;
     font-weight: bold;
 }
@@ -77,7 +78,7 @@ body {
 
 
 .titulo-pergunta {
-    font-size: 2.0rem;
+    font-size: 1.5rem;
     font-weight: 900;
     font-style: Bangers;
     line-height: 1.1;
@@ -88,11 +89,11 @@ body {
 
 .texto-revelacao {
     display: block;
-    min-height: 28px;
-    font-size: 1.3rem;
+    min-height: 40px;
+    font-size: 1.0rem;
     font-weight: 800;
     color: #ffcb05;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 
@@ -103,7 +104,7 @@ body {
 }
 
 #imgPokemon {
-    width: 440px;
+    width: 400px;
     height: 400px;
     object-fit: contain;
 }
@@ -123,7 +124,7 @@ body {
 .coluna-direita {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10x;
 }
 
 
@@ -143,7 +144,7 @@ body {
 
 .btn-opcao {
     width: 100%;
-    min-height: 135px;
+    min-height: 115px;
     background-color: #ffffff;
     color: #0a1128;
     border: none;
@@ -166,7 +167,7 @@ body {
 
 .btn-opcao:disabled {
     cursor: default;
-    opacity: 0.85;
+    opacity: 0.95;
 }
 
 

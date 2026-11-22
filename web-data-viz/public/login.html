@@ -27,7 +27,7 @@
                     <a href="index.html">Inicial</a>
                 </li>
                 <li>
-                    <a href="simulador.html">Simulador</a>
+                    <a href="quizMes.html">Quiz</a>
                 </li>
                 <li>|</li>
                 <li class="agora">
@@ -127,8 +127,11 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    /*sessionStorage.setItem("usuario_autenticado", "true");
-*/
+                    // Marca que o usuário está autenticado. Algumas páginas do
+                    // projeto verificam esse flag ("usuario_autenticado") antes
+                    // de permitir acesso — manter compatibilidade.
+                    sessionStorage.setItem("usuario_autenticado", "true");
+
                     setTimeout(function () {
                         window.location = "./index.html";
                     }, 1000); // apenas para exibir o loading

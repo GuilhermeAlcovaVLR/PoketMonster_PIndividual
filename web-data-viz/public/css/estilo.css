@@ -111,6 +111,11 @@ body {
   font-family: 'Bangers', system-ui;
   margin-top: 12px;
   padding: 8px;
+    transition: transform 0.2s ease;
+
+}
+.banner .button:hover{
+      transform: scale(1.15);
 
 }
 
@@ -550,16 +555,25 @@ input {
 }
 
 .card_individual_ {
-  width: 100%;
-  max-width: 500px;
-  min-width: 0;
-  height: fit-content;
-  background-color: white;
-  border-radius: 20px;
-  box-sizing: border-box;
-  margin: 0px;
-  flex-grow: 2;
-  padding: 30px;
+    width: 100%;
+    min-height: 115px;
+    background-color: #ffffff;
+    color: #0a1128;
+    border: none;
+    border-radius: 18px;
+    padding: 24px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+}
+
+.card_individual_:hover {
+    transform: scale(1.15);
 }
 
 .fim {
