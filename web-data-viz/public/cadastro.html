@@ -120,7 +120,7 @@
     if (emailVar === "") {
       erroInput(email_input, "Insira seu email")
     } else if (!emailVar.includes("@") || !emailVar.includes(".")) {
-      erroInput(email_input, `O email deve conter @ e "." (ex: red@gmail.com)`)
+      erroInput(email_input, `Oak: O email deve conter @ e "." (ex: red@gmail.com)`)
     } else {
       limparErrorInput(email_input);
     }
@@ -133,7 +133,7 @@
     if(senhaVar === ""){
       erroInput(senha_input, "Insira uma senha")
     }else if(senhaVar.length < 8){
-      erroInput(senha_input, "A senha deve ter pelo menos 8 caracteres")
+      erroInput(senha_input, "Oak: A senha deve ter pelo menos 8 caracteres")
     }else{
       limparErrorInput(senha_input);
     }
