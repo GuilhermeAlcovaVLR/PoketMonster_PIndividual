@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<!doctype html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowMarket - Caixas</title>
+    <link rel="stylesheet" href=".\css\dash.css" />
+
+
+    <!-- "Porteiro" da página: se não houver o item "usuario_autenticado" = "true"
+         no sessionStorage (gravado no login), manda o usuário de volta ao login.
+         replace() troca a página no histórico, então o botão "voltar" não reabre o dashboard. -->
+    <!--  <script>
+      if (sessionStorage.getItem("usuario_autenticado") != "true") {
+        window.location.replace("login.html");
+      }
+    </script>-->
+
+
+    <!-- Biblioteca Chart.js carregada via CDN. Ela cria a classe global "Chart". -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+    <header class="cabecaLhoDash">
+        <a href="..\index.html">
+            <div onclick="" class="molduraLogo" href="./pages/login.html">
+                <img src="../img/iconCart.png" alt="iconCart" />
+            </div>
+        </a>
+        <div class="cabecalhoButtonBar">
+            <!-- "ButtonSelecionado" marca a página atual -->
+            <a href="index.html" class="ButtonSelecionado cabecalhoButton verdeclaro">
+                <img src="./assets/imgs/iniciais/ABiconpokeball.png" width="100%" height="100%" alt="Home" />
+            </a>
+            <a href="quizMes.html" class=" cabecalhoButton branco">
+                <img src="./assets/gifPokeballPixel.gif" width="100%" height="100%" alt="Quiz" />
+            </a>
+            
+        </div>
+         <a href="">
+            <img class="perfilImg" src="..\img\Perfil.png" alt="Perfil" />
+        </a>
+    </header>
+
+
+       
+
+        <main class="mainDash">
+        <div class="topoDash">
+            <div class="tituloDash">
+                <h1 id="tituloDash">Jornada Pokémon</h1>
+            </div>
+        </div>
+
+    <section class="sectionKpis">
+    <div class="kpisDiv" id="cardKpi_FilasCaixas">
+        <div class="cardKpi" id="cardKpi_MediaDiaria">
+            <h3>Acertos</h3>
+            <h1 id="kpi_mediaDiariaValor">--</h1>
+        </div>
+
+        <div class="cardKpi" id="cardKpi_CaixaMaisCheio">
+            <h3>Tempo</h3>
+            <h1 id="kpi_caixaMaisCheioNome">--</h1>
+        </div>
+
+        <div class="cardKpi" id="cardKpi_TempoTotal">
+            <h3>Classe</h3>
+            <h1 id="kpi_tempoTotalValor">--</h1>
+        </div>
+    </div>
+</section>
+
+<section id="sectionGraficoCaixa" class="sectionDash">
+            <div id="cardCaixaPicoOcupacao" class="divCard">
+                <h1>Acertos x Erros</h1>
+                <div id="supCaixaPicoOcupacao" class="supDivSelect">
+                
+                </div>
+                <div class="chartContainer">
+                    <canvas id="graficoLinhaCaixaPicoOcupacao" class="canvasGrafico"
+                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
+                </div>
+            </div>
+
+                 <div id="cardCaixaPicoOcupacao" class="divCard">
+                <h1>Acertos por região</h1>
+                <div id="supCaixaPicoOcupacao" class="supDivSelect">
+       
+
+                </div>
+                <div class="chartContainer">
+                    <canvas id="graficoLinhaCaixaCopPicoOcupacao" class="canvasGrafico"
+                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
+                </div>
+            </div>
+                </div>
+
+                 <div id="cardCaixaPicoOcupacao" class="divCard">
+                <h1>HALL DA FAMA</h1>
+                <div id="supCaixaPicoOcupacao" class="supDivSelect">
+                 
+
+                </div>
+                <div class="chartContainer">
+                    <canvas id="graficoLinhaCaixaCopPicoOcupacao" class="canvasGrafico"
+                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        
+
+        
+    </main>
+
+
+    <script>
+
+
+
+        
+    </script>
+</body>
+
+
+</html>

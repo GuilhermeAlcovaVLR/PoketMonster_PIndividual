@@ -1,10 +1,3 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
 CREATE DATABASE mestre_pokemon;
 
 USE mestre_pokemon;
@@ -15,53 +8,51 @@ CREATE TABLE usuario (
 	email VARCHAR(140),
 	senha VARCHAR(50)
 );
-/*CREATE DATABASE aquatech;
 
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
-);
+CREATE DATABASE mestre_pokemon;
+USE mestre_pokemon;
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(140) NOT NULL UNIQUE,
+	senha VARCHAR(250) NOT NULL
 );
 
-CREATE TABLE aviso (
+CREATE TABLE resultado(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+    fk_usuario INT,
+    acertos INT NOT NULL,
+    data_resultado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	tempo_segundos INT NOT NULL,
+    CONSTRAINT fk_fk_usuario
+    FOREIGN KEY (fk_usuario) REFERENCES usuario (id),
+    CONSTRAINT chk_acertos CHECK (acertos BETWEEN 0 AND 30)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
+CREATE TABLE regiao(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	nome VARCHAR(10) NOT NULL UNIQUE
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+INSERT INTO regiao(nome) VALUES
+('Kanto'),
+('Johto'),
+('Hoenn'),
+('Sinnoh'),
+('Unova'),
+('Kalos');
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	temperatura DECIMAL,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE resultado_regiao(
+	fk_resultado INT,
+	fk_regiao INT,
+	acertos_regiao INT,
+    CONSTRAINT fk_fk_resultado 
+		FOREIGN KEY (fk_resultado) 
+			REFERENCES resultado (id),
+	CONSTRAINT fk_fk_regiao 
+		FOREIGN KEY (fk_regiao) 
+			REFERENCES regiao (id),
+	PRIMARY KEY(fk_resultado, fk_regiao),   
+    CONSTRAINT chk_acertos_regiao CHECK (acertos_regiao BETWEEN 0 AND 5)
 );
-
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);*/
