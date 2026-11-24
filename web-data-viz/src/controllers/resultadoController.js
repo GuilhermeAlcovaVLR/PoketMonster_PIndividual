@@ -86,7 +86,7 @@ async function getKpisPorUsuario(req, res) {
         console.error('Erro ao buscar KPIs:', err);
         return res.status(500).json({ error: 'Erro interno ao buscar KPIs.' });
     }
-}
+}   
 
 module.exports = {
     salvarResultado,

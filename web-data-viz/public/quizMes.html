@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master - Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
-      <link rel="icon" href="./assets/imgs/iniciais/ABiconmasterball.ico">
+    <link rel="icon" href="./assets/imgs/iniciais/ABiconmasterball.ico">
 
 
 </head>
 
 
 <body onload="onloadEsconder()">
-<script>
-          /*if (sessionStorage.getItem("usuario_autenticado") != "true") {
-        window.location.replace("login.html");
-      }*/
-      
-</script>
+    <script>
+        /*if (sessionStorage.getItem("usuario_autenticado") != "true") {
+      window.location.replace("login.html");
+    }*/
+
+    </script>
 
     <div id="pontuacaoEJogo">
         <div class="tela-inicial" id="telaInicial">
@@ -600,6 +600,23 @@
         btnProx.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
-
+        // Envia as paradas
+        fetch('/resultados', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                fk_usuario: sessionStorage.ID_USUARIO,
+                acertos: totalAcertos,
+                tempo_segundos: tempoTotalSegundos,
+                acertos_por_regiao: {
+                    Kanto: acertosKanto,
+                    Johto: acertosJohto,
+                    Hoenn: acertosHoenn,
+                    Sinnoh: acertosSinnoh,
+                    Unova: acertosUnova,
+                    Kalos: acertosKalos
+                }
+            })
+        });
     }
 </script>
