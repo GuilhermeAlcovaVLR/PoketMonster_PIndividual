@@ -12,33 +12,46 @@ var database = require('../database/config');
 // Inserir um resultado no banco.
 // Recebe um objeto com campos já preparados (números).
 function inserir(dados) {
-    // Monta instrução SQL usando interpolação simples para seguir estilo do projeto.
-    // Em produção, recomenda-se usar queries parametrizadas para evitar SQL injection.
-    var instrucaoSql = `
-        INSERT INTO resultado (
-            fk_usuario, acertos,data_resultado, tempo_segundos) VALUES (
-            ${dados.fk_usuario}, ${dados.acertos}, ${dados.data_resultado}, ${dados.tempo_segundos}
-        );
-          INSERT INTO resultado_regiao (
-            fk_resultado, fk_regiao, acertos_regiao) VALUES (
-            ${dados.fk_resultado}, ${dados.fk_regiao}, ${dados.acertos_regiao}
-        );
+    // 1. Insere o resultado principal (data_resultado usa DEFAULT CURRENT_TIMESTAMP)
+    var sqlResultado = `
+        INSERT INTO resultado (fk_usuario, acertos, tempo_segundos)
+        VALUES (${dados.fk_usuario}, ${dados.acertos}, ${dados.tempo_segundos});
     `;
 
-    console.log('Executando SQL (inserir resultado):', instrucaoSql);
-    return database.executar(instrucaoSql);
+    console.log('Executando SQL (inserir resultado):', sqlResultado);
+
+    return database.executar(sqlResultado).then(function (resultado) {
+        var fkResultado = resultado.insertId;
+
+        // 2. Insere as 6 regiões vinculadas ao ID recém-criado (IDs 1 a 6 conforme tabela regiao)
+        var sqlRegioes = `
+            INSERT INTO resultado_regiao (fk_resultado, fk_regiao, acertos_regiao) VALUES
+            (${fkResultado}, 1, ${dados.acertos_kanto}),
+            (${fkResultado}, 2, ${dados.acertos_johto}),
+            (${fkResultado}, 3, ${dados.acertos_hoenn}),
+            (${fkResultado}, 4, ${dados.acertos_sinnoh}),
+            (${fkResultado}, 5, ${dados.acertos_unova}),
+            (${fkResultado}, 6, ${dados.acertos_kalos});
+        `;
+
+        console.log('Executando SQL (inserir resultado_regiao):', sqlRegioes);
+
+        return database.executar(sqlRegioes).then(function () {
+            return resultado;
+        });
+    });
 }
 
 // Soma total de acertos e erradas — para o donut
 function totalAcertosErradas() {
-    var instrucaoSql = `
+    var resultadoSql = `
         SELECT
             acertos AS total_acertos,
             (30 - COALESCE(acertos, 0)) AS total_erradas
         FROM resultado;
     `;
-    console.log('Executando SQL (totalAcertosErradas):', instrucaoSql);
-    return database.executar(instrucaoSql).then(function (result) {
+    console.log('Executando SQL (totalAcertosErradas):', resultadoSql);
+    return database.executar(resultadoSql).then(function (result) {
         // database.executar retorna um array de rows; pegamos a primeira linha
         return result[0] || { total_acertos: 0, total_erradas: 0 };
     });
@@ -46,7 +59,7 @@ function totalAcertosErradas() {
 
 // Agregado de acertos por região — para radar
 function acertosPorRegiao() {
-    var instrucaoSql = `
+    var resultadoSql = `
         SELECT
             r.nome, 
             rg.acertos_regiao
@@ -54,15 +67,19 @@ function acertosPorRegiao() {
         JOIN regiao r 
         ON r.id = rg.fk_regiao;
     `;
-    console.log('Executando SQL (acertosPorRegiao):', instrucaoSql);
-    return database.executar(instrucaoSql).then(function (result) {
-        return result[0] || { Kanto: 0, Johto: 0, Hoenn: 0, Sinnoh: 0, Unova: 0, Kalos: 0 };
+    console.log('Executando SQL (acertosPorRegiao):', resultadoSql);
+    return database.executar(resultadoSql).then(function (result) {
+        var consolidado = { Kanto: 0, Johto: 0, Hoenn: 0, Sinnoh: 0, Unova: 0, Kalos: 0 };
+        for (var i = 0; i < result.length; i++) {
+            consolidado[result[i].nome] = Number(result[i].total);
+        }
+    return consolidado;
     });
 }
 
-// Hall da fama: registros que gabaritaram (pontuacao = total_questoes)
+// Hall da fama: registros que gabaritaram (acertos = total_questoes)
 function hallDaFama(limit) {
-    var instrucaoSql = `
+    var resultadoSql = `
         SELECT 
             u.id AS 'ID', 
             u.nome AS 'TREINADOR',     
@@ -70,50 +87,41 @@ function hallDaFama(limit) {
             r.data_resultado 'DATA'
         FROM usuario u
         JOIN resultado r
-        ON u.id = r.fk_usuario
+            ON u.id = r.fk_usuario
         WHERE r.acertos = 30
-        ORDER BY tempo_segundos
+        ORDER BY tempo_segundos ASC
         LIMIT ${limit};`
         ;
-    console.log('Executando SQL (hallDaFama):', instrucaoSql);
-    return database.executar(instrucaoSql);
+    console.log('Executando SQL (hallDaFama):', resultadoSql);
+    return database.executar(resultadoSql);
 }
 
 // KPIs para um usuário: total de acertos, média de tempo por tentativa, posição (ranking)
 function kpisPorUsuario(usuarioId) {
-    // total de acertos
-    var sqlTotalAcertos = `SELECT acertos AS total_acertos FROM resultado WHERE fk_usuario = ${usuarioId}`;
+    var instrucaoSql = `
+        SELECT 
+            COALESCE(SUM(acertos), 0) AS total_acertos,
+            COALESCE(ROUND(AVG(tempo_segundos)), 0) AS media_tempo_segundos,
+            CASE
+                WHEN MAX(acertos) = 30 THEN 'Mestre Pokémon'
+                WHEN MAX(acertos) >= 25 THEN 'Campeão'
+                WHEN MAX(acertos) >= 20 THEN 'Elite dos Quatro'
+                WHEN MAX(acertos) >= 15 THEN 'Líder de ginásio'
+                WHEN MAX(acertos) >= 10 THEN 'Comum'
+                ELSE 'Iniciante'
+            END AS classe
+        FROM resultado
+        WHERE fk_usuario = ${usuarioId};
+    `;
 
-    // média de tempo
-    var sqlMediaTempo = `SELECT tempo_segundos AS media_tempo FROM resultado WHERE fk_usuario = ${usuarioId}`;
+    console.log('Executando SQL (kpisPorUsuario):', instrucaoSql);
 
-    // posição por soma de pontos (1 = maior soma)
-    var sqlClasse = `
-    SELECT 
-	CASE
-		WHEN acertos = 30 THEN 'Mestre Pokémon'
-		WHEN acertos >= 25 THEN 'Campeão'
-		WHEN acertos >= 20 THEN 'Elite dos Quatro'
-		WHEN acertos >= 15 THEN 'Líder de ginásio'
-		WHEN acertos >= 10 THEN 'Comum'
-		ELSE 'Iniciante'
-	END AS 'classe'
-    FROM resultado WHERE fk_usuario = ${usuarioId};`
-    ;
-
-    console.log('Executando SQLs (kpisPorUsuario)');
-
-    // Executa as três queries em sequência (poderia paralelizar)
-    return database.executar(sqlTotalAcertos).then(function (r1) {
-        return database.executar(sqlMediaTempo).then(function (r2) {
-            return database.executar(sqlClasse).then(function (r3) {
-                return {
-                    total_acertos: (r1[0] && r1[0].total_acertos) || 0,
-                    media_tempo_segundos: (r2[0] && r2[0].media_tempo) || 0,
-                    posicao: (r3[0] && r3[0].posicao) || 0
-                };
-            });
-        });
+    return database.executar(instrucaoSql).then(function (result) {
+        return result[0] || {
+            total_acertos: 0,
+            media_tempo_segundos: 0,
+            classe: 'Iniciante'
+        };
     });
 }
 
