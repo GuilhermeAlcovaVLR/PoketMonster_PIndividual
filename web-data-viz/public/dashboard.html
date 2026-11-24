@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
 
 <!doctype html>
@@ -51,47 +54,47 @@
             <a href="quizMes.html" class=" cabecalhoButton branco">
                 <img src="./assets/gifPokeballPixel.gif" width="100%" height="100%" alt="Quiz" />
             </a>
-            
+
         </div>
-         <a href="">
+        <a href="">
             <img class="perfilImg" src="..\img\Perfil.png" alt="Perfil" />
         </a>
     </header>
 
 
-       
 
-        <main class="mainDash">
+
+    <main class="mainDash">
         <div class="topoDash">
             <div class="tituloDash">
                 <h1 id="tituloDash">Jornada Pokémon</h1>
             </div>
         </div>
 
-    <section class="sectionKpis">
-    <div class="kpisDiv" id="cardKpi_FilasCaixas">
-        <div class="cardKpi" id="cardKpi_MediaDiaria">
-            <h3>Acertos</h3>
-            <h1 id="kpi_mediaDiariaValor">--</h1>
-        </div>
+        <section class="sectionKpis">
+            <div class="kpisDiv" id="cardKpi_FilasCaixas">
+                <div class="cardKpi" id="cardKpi_MediaDiaria">
+                    <h3>Acertos</h3>
+                    <h1 id="kpi_mediaDiariaValor">--</h1>
+                </div>
 
-        <div class="cardKpi" id="cardKpi_CaixaMaisCheio">
-            <h3>Tempo</h3>
-            <h1 id="kpi_caixaMaisCheioNome">--</h1>
-        </div>
+                <div class="cardKpi" id="cardKpi_CaixaMaisCheio">
+                    <h3>Tempo</h3>
+                    <h1 id="kpi_caixaMaisCheioNome">--</h1>
+                </div>
 
-        <div class="cardKpi" id="cardKpi_TempoTotal">
-            <h3>Classe</h3>
-            <h1 id="kpi_tempoTotalValor">--</h1>
-        </div>
-    </div>
-</section>
+                <div class="cardKpi" id="cardKpi_TempoTotal">
+                    <h3>Classe</h3>
+                    <h1 id="kpi_tempoTotalValor">--</h1>
+                </div>
+            </div>
+        </section>
 
-<section id="sectionGraficoCaixa" class="sectionDash">
+        <section id="sectionGraficoCaixa" class="sectionDash">
             <div id="cardCaixaPicoOcupacao" class="divCard">
                 <h1>Acertos x Erros</h1>
                 <div id="supCaixaPicoOcupacao" class="supDivSelect">
-                
+
                 </div>
                 <div class="chartContainer">
                     <canvas id="graficoLinhaCaixaPicoOcupacao" class="canvasGrafico"
@@ -99,23 +102,23 @@
                 </div>
             </div>
 
-                 <div id="cardCaixaPicoOcupacao" class="divCard">
+            <div id="AcertosRegiao" class="divCard">
                 <h1>Acertos por região</h1>
                 <div id="supCaixaPicoOcupacao" class="supDivSelect">
-       
+
 
                 </div>
                 <div class="chartContainer">
-                    <canvas id="graficoLinhaCaixaCopPicoOcupacao" class="canvasGrafico"
+                    <canvas id="canvasAcertosRegiao" class="canvasGrafico"
                         aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
                 </div>
             </div>
-                </div>
+            </div>
 
-                 <div id="cardCaixaPicoOcupacao" class="divCard">
+            <div id="cardCaixaPicoOcupacao" class="divCard">
                 <h1>HALL DA FAMA</h1>
                 <div id="supCaixaPicoOcupacao" class="supDivSelect">
-                 
+
 
                 </div>
                 <div class="chartContainer">
@@ -126,17 +129,58 @@
 
         </section>
 
-        
 
-        
+
+
     </main>
 
 
     <script>
 
+        const ctx = document.getElementById('graficoLinhaCaixaPicoOcupacao');
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'white'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [20, 20],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
 
-        
+
+
+        const ctx2 = document.getElementById('canvasAcertosRegiao');
+
+        new Chart(ctx2, {
+            type: 'radar',
+            data: {
+                labels: ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [5, 3, 3, 1, 5, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
