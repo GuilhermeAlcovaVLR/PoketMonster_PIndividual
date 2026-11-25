@@ -73,6 +73,8 @@
                         questão</button>
                     <button onclick="tentarNovamente()" id="btnTentarNovamente" class="btn-acao" disabled>Tentar
                         novamente</button>
+                        <button onclick="verDesempenho()" id="btnVerDesempenho" class="btn-acao" disabled>Ver Desempenho         
+                        </button>
                 </div>
             </section>
 
@@ -488,6 +490,7 @@
         btnProx.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
+        btnVerDesempenho.disabled = true
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -569,6 +572,11 @@
         window.location.reload()
     }
 
+        function verDesempenho() {
+        // atualiza a página
+      window.location.replace("dashboard.html");
+    }
+
 
 
 
@@ -604,6 +612,7 @@
         btnProx.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
+        btnVerDesempenho.disabled = false
         // Envia as paradas
         fetch('/resultados', {
             method: 'POST',
