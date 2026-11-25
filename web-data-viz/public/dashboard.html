@@ -1,188 +1,427 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
-
+<!-- Declara ao navegador que este documento utiliza HTML5 -->
 <!doctype html>
+<!-- Abre o elemento raiz da página e define o idioma como Português do Brasil -->
 <html lang="pt-br">
 
-
+<!-- Abre a seção de configurações e metadados (não aparece diretamente na tela) -->
 <head>
+    <!-- Define a codificação de caracteres UTF-8 para aceitar acentos e cedilha (ç, ã, é) -->
     <meta charset="UTF-8" />
+    <!-- Ajusta a escala e largura da página ao tamanho da tela do dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlowMarket - Caixas</title>
-    <link rel="stylesheet" href=".\css\dash.css" />
+    <!-- Define o título exibido na aba do navegador -->
+    <title>Jornada Pokémon - Dashboard</title>
+    <!-- Importa o arquivo CSS externo que estiliza o layout da dashboard -->
+    <link rel="stylesheet" href="./css/dash.css" />
 
+    <!-- Bloco comentado que bloqueia o acesso caso o usuário não tenha feito login:
+    <script>
+        if (sessionStorage.getItem("usuario_autenticado") != "true") {
+            window.location.replace("login.html");
+        }
+    </script>
+    -->
 
-    <!-- "Porteiro" da página: se não houver o item "usuario_autenticado" = "true"
-         no sessionStorage (gravado no login), manda o usuário de volta ao login.
-         replace() troca a página no histórico, então o botão "voltar" não reabre o dashboard. -->
-    <!--  <script>
-      if (sessionStorage.getItem("usuario_autenticado") != "true") {
-        window.location.replace("login.html");
-      }
-    </script>-->
-
-
-    <!-- Biblioteca Chart.js carregada via CDN. Ela cria a classe global "Chart". -->
+    <!-- Importa a biblioteca Chart.js via CDN para renderizar os gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Fecha a seção head -->
 </head>
 
-
-<body>
+<!-- Abre o corpo da página e executa carregarDashboard() assim que tudo carregar -->
+<body onload="carregarDashboard()">
+    <!-- Abre o cabeçalho superior da dashboard -->
     <header class="cabecaLhoDash">
-        <a href="..\index.html">
-            <div onclick="" class="molduraLogo" href="login.html">
-                <img src="../img/iconCart.png" alt="iconCart" />
+        <!-- Link que redireciona para a página inicial ao clicar na logo -->
+        <a href="../index.html">
+            <!-- Div que aplica a moldura estilizada ao redor do logotipo -->
+            <div class="molduraLogo">
+                <!-- Imagem do logotipo -->
+                <img src="../img/iconCart.png" alt="Logo" />
+            <!-- Fecha a div da moldura -->
             </div>
+        <!-- Fecha o link da logo -->
         </a>
+        <!-- Barra central com os botões de navegação entre páginas -->
         <div class="cabecalhoButtonBar">
-            <!-- "ButtonSelecionado" marca a página atual -->
+            <!-- Botão estilizado como ativo que leva para a Home -->
             <a href="index.html" class="ButtonSelecionado cabecalhoButton verdeclaro">
+                <!-- Ícone da Pokébola dentro do botão Home -->
                 <img src="./assets/imgs/iniciais/ABiconpokeball.png" width="100%" height="100%" alt="Home" />
+            <!-- Fecha o link da Home -->
             </a>
-            <a href="quizMes.html" class=" cabecalhoButton branco">
+            <!-- Botão que leva para a página do Quiz -->
+            <a href="quizMes.html" class="cabecalhoButton branco">
+                <!-- GIF animado da Pokébola dentro do botão Quiz -->
                 <img src="./assets/gifPokeballPixel.gif" width="100%" height="100%" alt="Quiz" />
+            <!-- Fecha o link do Quiz -->
             </a>
-
+        <!-- Fecha a barra de botões -->
         </div>
+        <!-- Link para a área de perfil do usuário -->
         <a href="">
-            <img class="perfilImg" src="..\img\Perfil.png" alt="Perfil" />
+            <!-- Imagem/ícone do avatar de perfil -->
+            <img class="perfilImg" src="../img/Perfil.png" alt="Perfil" />
+        <!-- Fecha o link do perfil -->
         </a>
+    <!-- Fecha o cabeçalho -->
     </header>
 
-
-
-
+    <!-- Abre o conteúdo principal da dashboard -->
     <main class="mainDash">
+        <!-- Faixa superior interna para o título da página -->
         <div class="topoDash">
+            <!-- Contêiner do texto do título -->
             <div class="tituloDash">
+                <!-- Título principal exibido no topo da dashboard -->
                 <h1 id="tituloDash">Jornada Pokémon</h1>
+            <!-- Fecha o contêiner do título -->
             </div>
+        <!-- Fecha o topoDash -->
         </div>
 
+        <!-- Seção que agrupa os 3 cartões de indicadores (KPIs) -->
         <section class="sectionKpis">
+            <!-- Grade que posiciona os 3 cards lado a lado -->
             <div class="kpisDiv" id="cardKpi_FilasCaixas">
+                <!-- Primeiro cartão de KPI: Acertos -->
                 <div class="cardKpi" id="cardKpi_MediaDiaria">
+                    <!-- Rótulo do card -->
                     <h3>Acertos</h3>
+                    <!-- Valor dinâmico preenchido pelo JS (começa com --) -->
                     <h1 id="kpi_mediaDiariaValor">--</h1>
+                <!-- Fecha o card de Acertos -->
                 </div>
 
+                <!-- Segundo cartão de KPI: Tempo -->
                 <div class="cardKpi" id="cardKpi_CaixaMaisCheio">
+                    <!-- Rótulo do card -->
                     <h3>Tempo</h3>
+                    <!-- Valor dinâmico do tempo gasto preenchido pelo JS -->
                     <h1 id="kpi_caixaMaisCheioNome">--</h1>
+                <!-- Fecha o card de Tempo -->
                 </div>
 
+                <!-- Terceiro cartão de KPI: Classe -->
                 <div class="cardKpi" id="cardKpi_TempoTotal">
+                    <!-- Rótulo do card -->
                     <h3>Classe</h3>
+                    <!-- Valor dinâmico da patente alcançada preenchido pelo JS -->
                     <h1 id="kpi_tempoTotalValor">--</h1>
+                <!-- Fecha o card de Classe -->
                 </div>
+            <!-- Fecha a grade de KPIs -->
             </div>
+        <!-- Fecha a seção de KPIs -->
         </section>
 
+        <!-- Seção principal que contém os gráficos e o Hall da Fama -->
         <section id="sectionGraficoCaixa" class="sectionDash">
+            <!-- Cartão visual do gráfico Donut -->
             <div id="cardCaixaPicoOcupacao" class="divCard">
+                <!-- Título do cartão -->
                 <h1>Acertos x Erros</h1>
-                <div id="supCaixaPicoOcupacao" class="supDivSelect">
-
-                </div>
+                <!-- Div auxiliar vazia para manter o espaçamento do CSS -->
+                <div id="supCaixaPicoOcupacao" class="supDivSelect"></div>
+                <!-- Contêiner que limita as dimensões do gráfico -->
                 <div class="chartContainer">
+                    <!-- Elemento canvas onde o Chart.js desenha o gráfico de rosca -->
                     <canvas id="graficoLinhaCaixaPicoOcupacao" class="canvasGrafico"
-                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
+                        aria-label="Gráfico de rosca de acertos e erros"></canvas>
+                <!-- Fecha o contêiner do gráfico -->
                 </div>
+            <!-- Fecha o cartão do Donut -->
             </div>
 
+            <!-- Cartão visual do gráfico Radar -->
             <div id="AcertosRegiao" class="divCard">
+                <!-- Título do cartão -->
                 <h1>Acertos por região</h1>
-                <div id="supCaixaPicoOcupacao" class="supDivSelect">
-
-
-                </div>
+                <!-- Div auxiliar vazia para manter o espaçamento do CSS -->
+                <div class="supDivSelect"></div>
+                <!-- Contêiner que limita as dimensões do gráfico -->
                 <div class="chartContainer">
+                    <!-- Elemento canvas onde o Chart.js desenha o gráfico de radar -->
                     <canvas id="canvasAcertosRegiao" class="canvasGrafico"
-                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
+                        aria-label="Gráfico radar de acertos por região"></canvas>
+                <!-- Fecha o contêiner do gráfico -->
                 </div>
-            </div>
+            <!-- Fecha o cartão do Radar -->
             </div>
 
-            <div id="cardCaixaPicoOcupacao" class="divCard">
+            <!-- Cartão visual da tabela Hall da Fama -->
+            <div id="cardHallDaFama" class="divCard">
+                <!-- Título do cartão -->
                 <h1>HALL DA FAMA</h1>
-                <div id="supCaixaPicoOcupacao" class="supDivSelect">
-
-
+                <!-- Div auxiliar vazia para manter o espaçamento do CSS -->
+                <div class="supDivSelect"></div>
+                <!-- Contêiner com barra de rolagem vertical automática -->
+                <div class="chartContainer" style="overflow-y: auto; width: 100%;">
+                    <!-- Tabela que lista os jogadores que gabaritaram (30/30) -->
+                    <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                        <!-- Cabeçalho fixo da tabela -->
+                        <thead>
+                            <!-- Linha dos títulos das colunas com borda inferior -->
+                            <tr style="border-bottom: 1px solid #ccc;">
+                                <!-- Coluna da posição no ranking -->
+                                <th style="padding: 8px;">#</th>
+                                <!-- Coluna do nome do treinador -->
+                                <th style="padding: 8px;">Treinador</th>
+                                <!-- Coluna do tempo gasto -->
+                                <th style="padding: 8px;">Tempo</th>
+                                <!-- Coluna da data da tentativa -->
+                                <th style="padding: 8px;">Data</th>
+                            <!-- Fecha a linha do cabeçalho -->
+                            </tr>
+                        <!-- Fecha o cabeçalho da tabela -->
+                        </thead>
+                        <!-- Corpo da tabela que receberá as linhas via JavaScript -->
+                        <tbody id="tabelaHallDaFama">
+                            <!-- Linha provisória exibida antes dos dados chegarem do banco -->
+                            <tr>
+                                <!-- Célula que ocupa as 4 colunas com aviso de carregamento -->
+                                <td colspan="4" style="padding: 12px;">Carregando...</td>
+                            <!-- Fecha a linha provisória -->
+                            </tr>
+                        <!-- Fecha o corpo da tabela -->
+                        </tbody>
+                    <!-- Fecha a tabela -->
+                    </table>
+                <!-- Fecha o contêiner do Hall da Fama -->
                 </div>
-                <div class="chartContainer">
-                    <canvas id="graficoLinhaCaixaCopPicoOcupacao" class="canvasGrafico"
-                        aria-label="Gráfico de linha do pico de ocupação por caixa"></canvas>
-                </div>
+            <!-- Fecha o cartão do Hall da Fama -->
             </div>
-
+        <!-- Fecha a seção dos gráficos -->
         </section>
-
-
-
-
+    <!-- Fecha o conteúdo principal -->
     </main>
 
-
+    <!-- Abre o bloco de código JavaScript -->
     <script>
+        // Função principal disparada pelo onload do <body> para iniciar todas as consultas
+        function carregarDashboard() {
+            // Lê o ID do usuário logado que foi salvo no navegador durante o login
+            const idUsuario = sessionStorage.ID_USUARIO;
 
-        const ctx = document.getElementById('graficoLinhaCaixaPicoOcupacao');
-
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Red', 'white'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [20, 20],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+            // Verifica se existe um ID de usuário válido na sessão
+            if (idUsuario) {
+                // Busca e preenche as 3 KPIs do usuário logado
+                carregarKpis(idUsuario);
+            // Caso não haja usuário logado na sessão:
+            } else {
+                // Exibe um alerta no console do navegador para ajudar no debug
+                console.warn('ID_USUARIO não encontrado no sessionStorage.');
             }
-        });
 
+            // Chama a função que monta o gráfico Donut (Acertos x Erros)
+            carregarDonut();
+            // Chama a função que monta o gráfico Radar (Acertos por Região)
+            carregarRadar();
+            // Chama a função que preenche a tabela do Hall da Fama
+            carregarHallDaFama();
+        }
 
+        // 1. Função que busca os indicadores da última tentativa do usuário
+        function carregarKpis(usuarioId) {
+            // Faz uma requisição HTTP GET para a rota de KPIs passando o ID do usuário
+            fetch(`/resultados/kpis/${usuarioId}`)
+                // Aguarda a resposta do servidor
+                .then(function (resposta) {
+                    // Se o status HTTP não for sucesso (200-299), lança um erro para o .catch()
+                    if (!resposta.ok) throw new Error('Erro ao buscar KPIs');
+                    // Converte o corpo da resposta de texto JSON para objeto JavaScript
+                    return resposta.json();
+                })
+                // Recebe o objeto JSON convertido (com acertos, tempo_segundos e classe)
+                .then(function (dados) {
+                    // Atualiza o HTML do card de Acertos (ex: "24 / 30")
+                    document.getElementById('kpi_mediaDiariaValor').innerHTML = `${dados.acertos} / 30`;
+                    // Atualiza o HTML do card de Tempo (ex: "85s")
+                    document.getElementById('kpi_caixaMaisCheioNome').innerHTML = `${dados.tempo_segundos}s`;
+                    // Atualiza o HTML do card de Classe (ex: "Elite dos Quatro")
+                    document.getElementById('kpi_tempoTotalValor').innerHTML = dados.classe;
+                })
+                // Captura qualquer falha de rede ou erro lançado nos .then() anteriores
+                .catch(function (erro) {
+                    // Imprime o erro no console do navegador
+                    console.error('Erro nas KPIs:', erro);
+                });
+        }
 
+        // 2. Função que busca o total geral de acertos/erros e cria o gráfico Donut
+        function carregarDonut() {
+            // Faz uma requisição HTTP GET para a rota /resultados/percentual
+            fetch('/resultados/percentual')
+                // Aguarda a resposta do servidor
+                .then(function (resposta) {
+                    // Verifica se a requisição deu certo; se falhou, interrompe indo para o catch
+                    if (!resposta.ok) throw new Error('Erro ao buscar percentual');
+                    // Converte a resposta para objeto JSON
+                    return resposta.json();
+                })
+                // Recebe o objeto { total_acertos, total_erradas }
+                .then(function (dados) {
+                    // Seleciona o elemento <canvas> onde o gráfico Donut será desenhado
+                    const ctx = document.getElementById('graficoLinhaCaixaPicoOcupacao');
 
-        const ctx2 = document.getElementById('canvasAcertosRegiao');
+                    // Instancia um novo gráfico do Chart.js dentro do canvas selecionado
+                    new Chart(ctx, {
+                        // Define o tipo do gráfico como rosca (doughnut)
+                        type: 'doughnut',
+                        // Bloco com os dados e rótulos do gráfico
+                        data: {
+                            // Nomes das fatias na legenda
+                            labels: ['Acertos', 'Erros'],
+                            // Lista de conjuntos de dados (apenas 1 conjunto neste gráfico)
+                            datasets: [{
+                                // Nome do conjunto de dados exibido ao passar o mouse
+                                label: 'Questões',
+                                // Valores numéricos vindos do banco de dados
+                                data: [dados.total_acertos, dados.total_erradas],
+                                // Cores de preenchimento de cada fatia (verde para acertos, vermelho para erros)
+                                backgroundColor: ['#4CAF50', '#E53935'],
+                                // Espessura da borda entre as fatias (1 pixel)
+                                borderWidth: 1
+                            }]
+                        },
+                        // Configurações visuais de comportamento do gráfico
+                        options: {
+                            // Faz o gráfico se adaptar automaticamente ao tamanho da tela
+                            responsive: true,
+                            // Permite que o gráfico preencha livremente a altura do contêiner CSS
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                // Captura e exibe possíveis erros na requisição ou criação do gráfico
+                .catch(function (erro) {
+                    console.error('Erro no gráfico Donut:', erro);
+                });
+        }
 
-        new Chart(ctx2, {
-            type: 'radar',
-            data: {
-                labels: ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [5, 3, 3, 1, 5, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+        // 3. Função que busca os acertos por região e cria o gráfico Radar
+        function carregarRadar() {
+            // Faz uma requisição HTTP GET para a rota /resultados/por-regiao
+            fetch('/resultados/por-regiao')
+                // Aguarda a resposta do servidor
+                .then(function (resposta) {
+                    // Verifica se a resposta HTTP foi bem-sucedida
+                    if (!resposta.ok) throw new Error('Erro ao buscar acertos por região');
+                    // Converte a resposta para objeto JSON
+                    return resposta.json();
+                })
+                // Recebe o objeto com as 6 regiões { Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos }
+                .then(function (dados) {
+                    // Seleciona o elemento <canvas> onde o gráfico Radar será desenhado
+                    const ctx2 = document.getElementById('canvasAcertosRegiao');
+
+                    // Instancia o gráfico Radar do Chart.js
+                    new Chart(ctx2, {
+                        // Define o formato como radar (teia)
+                        type: 'radar',
+                        // Bloco de dados do gráfico
+                        data: {
+                            // Os 6 vértices (pontas) do gráfico radar
+                            labels: ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos'],
+                            // Conjunto de dados plotado na teia
+                            datasets: [{
+                                // Rótulo exibido na legenda superior
+                                label: 'Acertos por Região',
+                                // Array com os valores de cada região na mesma ordem dos labels acima
+                                data: [
+                                    dados.Kanto,
+                                    dados.Johto,
+                                    dados.Hoenn,
+                                    dados.Sinnoh,
+                                    dados.Unova,
+                                    dados.Kalos
+                                ],
+                                // Cor de fundo translúcida dentro da área preenchida do radar
+                                backgroundColor: 'rgba(54, 162, 235, 0.25)',
+                                // Cor da linha que liga os pontos
+                                borderColor: 'rgb(54, 162, 235)',
+                                // Cor das bolinhas marcadoras em cada vértice
+                                pointBackgroundColor: 'rgb(54, 162, 235)',
+                                // Espessura da linha do radar (2 pixels)
+                                borderWidth: 2
+                            }]
+                        },
+                        // Configurações de escala e responsividade
+                        options: {
+                            // Adapta o gráfico ao tamanho do contêiner
+                            responsive: true,
+                            // Libera a proporção fixa para respeitar o CSS
+                            maintainAspectRatio: false,
+                            // Configura as escalas do gráfico
+                            scales: {
+                                // 'r' representa o eixo radial (do centro para as pontas)
+                                r: {
+                                    // Garante que o centro do radar sempre comece em zero
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                // Captura e exibe possíveis erros no console
+                .catch(function (erro) {
+                    console.error('Erro no gráfico Radar:', erro);
+                });
+        }
+
+        // 4. Função que busca os treinadores que gabaritaram e preenche a tabela HTML
+        function carregarHallDaFama() {
+            // Faz uma requisição HTTP GET para a rota /resultados/hall
+            fetch('/resultados/hall')
+                // Aguarda a resposta do servidor
+                .then(function (resposta) {
+                    // Verifica se a resposta HTTP foi bem-sucedida
+                    if (!resposta.ok) throw new Error('Erro ao buscar Hall da Fama');
+                    // Converte a resposta para um array de objetos JSON
+                    return resposta.json();
+                })
+                // Recebe a lista (array) com os registros dos treinadores
+                .then(function (lista) {
+                    // Seleciona o corpo (<tbody>) da tabela no HTML
+                    const tbody = document.getElementById('tabelaHallDaFama');
+                    // Limpa o conteúdo anterior (apaga o texto "Carregando...")
+                    tbody.innerHTML = '';
+
+                    // Verifica se a lista veio vazia (ninguém tirou 30/30 ainda)
+                    if (lista.length === 0) {
+                        // Insere uma linha avisando que ainda não há registros no Hall da Fama
+                        tbody.innerHTML = `
+                            <tr>
+                                <td colspan="4" style="padding: 12px;">Nenhum Mestre Pokémon ainda!</td>
+                            </tr>
+                        `;
+                        // Encerra a execução da função aqui
+                        return;
                     }
-                }
-            }
-        });
+
+                    // Percorre cada item da lista (registro = dados da linha, index = posição 0, 1, 2...)
+                    lista.forEach(function (registro, index) {
+                        // Converte a data ISO vinda do MySQL para o padrão brasileiro (DD/MM/AAAA)
+                        const dataFormatada = new Date(registro.DATA).toLocaleDateString('pt-BR');
+                        // Adiciona (+=) uma nova linha <tr> dentro do <tbody> para cada treinador
+                        tbody.innerHTML += `
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 8px;">${index + 1}º</td>
+                                <td style="padding: 8px;">${registro.TREINADOR}</td>
+                                <td style="padding: 8px;">${registro.TEMPO}s</td>
+                                <td style="padding: 8px;">${dataFormatada}</td>
+                            </tr>
+                        `;
+                    });
+                })
+                // Captura e exibe possíveis erros no console
+                .catch(function (erro) {
+                    console.error('Erro no Hall da Fama:', erro);
+                });
+        }
+    <!-- Fecha o bloco JavaScript -->
     </script>
+<!-- Fecha o corpo da página -->
 </body>
 
-
+<!-- Fecha o documento HTML -->
 </html>

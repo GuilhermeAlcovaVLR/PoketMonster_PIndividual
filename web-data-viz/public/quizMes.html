@@ -14,9 +14,9 @@
 
 <body onload="onloadEsconder()">
     <script>
-        /*if (sessionStorage.getItem("usuario_autenticado") != "true") {
+        if (sessionStorage.getItem("usuario_autenticado") != "true") {
       window.location.replace("login.html");
-    }*/
+    }
 
     </script>
 
@@ -480,7 +480,9 @@
         document.getElementById('containerQuiz').style.display = "grid";
 
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
-
+        
+        tempoInicio = Date.now();
+        
         preencherHTMLcomQuestaoAtual(0)
 
         btnProx.disabled = true
@@ -575,6 +577,8 @@
         let classComCoresParaMensagemFinal = null
         const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
+        const tempoTotalSegundos = Math.round((Date.now() - tempoInicio) / 1000);
+
         if (porcentagemFinalDeAcertos <= 0.3) {
             textoParaMensagemFinal = "Parece que você não estudou..."
             classComCoresParaMensagemFinal = "text-danger-with-bg"
@@ -606,16 +610,9 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 fk_usuario: sessionStorage.ID_USUARIO,
-                acertos: totalAcertos,
+                acertos: certas,
                 tempo_segundos: tempoTotalSegundos,
-                acertos_por_regiao: {
-                    Kanto: acertosKanto,
-                    Johto: acertosJohto,
-                    Hoenn: acertosHoenn,
-                    Sinnoh: acertosSinnoh,
-                    Unova: acertosUnova,
-                    Kalos: acertosKalos
-                }
+                acertos_por_regiao: certaRegiao
             })
         });
     }
