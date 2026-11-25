@@ -46,7 +46,11 @@ async function salvarResultado(req, res) {
 
 async function getPercentualAcertos(req, res) {
     try {
-        const dados = await resultadoModel.totalAcertosErradas();
+        const usuarioId = parseInt(req.params.usuarioId);
+        if (!usuarioId) return res.status(400).json({ error: 'usuarioId inválido.' });
+
+        
+        const dados = await resultadoModel.totalAcertosErradas(usuarioId);
         return res.status(200).json(dados);
     } catch (err) {
         console.error('Erro ao buscar percentual:', err);
@@ -56,7 +60,10 @@ async function getPercentualAcertos(req, res) {
 
 async function getAcertosPorRegiao(req, res) {
     try {
-        const dados = await resultadoModel.acertosPorRegiao();
+        const usuarioId = parseInt(req.params.usuarioId);
+        if (!usuarioId) return res.status(400).json({ error: 'usuarioId inválido.' });
+
+        const dados = await resultadoModel.acertosPorRegiao(usuarioId);
         return res.status(200).json(dados);
     } catch (err) {
         console.error('Erro ao buscar acertos por regiao:', err);

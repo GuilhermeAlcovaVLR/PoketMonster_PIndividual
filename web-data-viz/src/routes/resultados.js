@@ -18,11 +18,11 @@ router.post('/', resultadoController.salvarResultado);
 
 // GET /resultados/percentual
 // Retorna soma/percentual de acertos x erros (para o donut)
-router.get('/percentual', resultadoController.getPercentualAcertos);
+router.get('/percentual/:usuarioId', resultadoController.getPercentualAcertos);
 
 // GET /resultados/por-regiao
 // Retorna acertos agregados por região (para o radar)
-router.get('/por-regiao', resultadoController.getAcertosPorRegiao);
+router.get('/por-regiao/:usuarioId', resultadoController.getAcertosPorRegiao);
 
 // GET /resultados/hall
 // Retorna lista de tentativas que gabaritaram (nome, momento, tempo)
