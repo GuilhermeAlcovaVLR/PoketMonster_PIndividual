@@ -94,15 +94,15 @@
                     <table style="width: 100%; border-collapse: collapse; text-align: center;">
                         <thead>
                             <tr style="border-bottom: 1px solid #ccc;">
-                                <th style="padding: 8px;">#</th>
-                                <th style="padding: 8px;">Treinador</th>
-                                <th style="padding: 8px;">Tempo</th>
-                                <th style="padding: 8px;">Data</th>
+                                <th style="padding: 8px; color: white;">#</th>
+                                <th style="padding: 8px; color: white;">Treinador</th>
+                                <th style="padding: 8px; color: white;">Tempo</th>
+                                <th style="padding: 8px; color: white;">Data</th>
                             </tr>
                         </thead>
                         <tbody id="tabelaHallDaFama">
                             <tr>
-                                <td colspan="4" style="padding: 12px;">Carregando...</td>
+                                <td colspan="4" style="padding: 12px; color: white; font-family: bangers;">Carregando...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -154,7 +154,7 @@
                     const ctx = document.getElementById('graficoLinhaCaixaPicoOcupacao');
 
                     new Chart(ctx, {
-                        type: 'doughnut',
+                        type: 'doughnut', 
                         data: {
                             labels: ['Acertos', 'Erros'],
                             datasets: [{
@@ -257,7 +257,7 @@
                     if (lista.length === 0) {
                         tbody.innerHTML = `
                             <tr>
-                                <td colspan="4" style="padding: 12px;">Nenhum Mestre Pokémon ainda!</td>
+                                <td colspan="4" style="padding: 12px; color: white;">Nenhum Mestre Pokémon ainda!</td>
                             </tr>
                         `;
                         return;
@@ -267,13 +267,15 @@
                         const dataFormatada = new Date(registro.DATA).toLocaleDateString('pt-BR');
                         tbody.innerHTML += `
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 8px;">${index + 1}º</td>
-                                <td style="padding: 8px;">${registro.TREINADOR}</td>
-                                <td style="padding: 8px;">${registro.TEMPO}s</td>
-                                <td style="padding: 8px;">${dataFormatada}</td>
+                                <td style="padding: 8px; color: white">${index + 1}º</td>
+                                <td style="padding: 8px; color: white">${registro.TREINADOR}</td>
+                                <td style="padding: 8px; color: white">${registro.TEMPO}s</td>
+                                <td style="padding: 8px; color: white">${dataFormatada}</td>
                             </tr>
                         `;
                     });
+
+                    
                 })
                 .catch(function (erro) {
                     console.error('Erro no Hall da Fama:', erro);

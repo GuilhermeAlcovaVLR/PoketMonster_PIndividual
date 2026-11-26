@@ -113,7 +113,8 @@
 
 .cardKpi h3{
     color: #fff;
-    font-weight: 400;
+    font-weight: 0;
+    letter-spacing: 5px;
     font-family: bangers, sans-serif;
     margin: 0 0 5px 0;
 }
@@ -153,7 +154,7 @@
     width: 100%;
     padding: 20px;
     border-radius: 10px;
-    height: 400px;
+    height: 370px;
     display: flex;
     flex-direction: column;
     gap: 10px;
